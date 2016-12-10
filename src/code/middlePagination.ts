@@ -3,128 +3,141 @@ import { PaginationItem } from './core/paginationItem';
 import { paginationEnum } from './core/IPagination';
 
 export class MiddlePagination extends PaginationBase {
-    Range: number = 4;
 
-    private ShowPagerNumber(currentIndex: number, maxPageItems: number, currentPageIndex: number, totalPages: number, page: number) {
+    range: number = 4;
 
-        var rightNumber = totalPages - (currentPageIndex + 1);
-        if (rightNumber > this.Range) {
-            rightNumber = this.Range;
+    constructor() {
+        super();
+    }
+
+    private processItems() {
+
+        var rightNumber = this.total - (this.current + 1);
+        if (rightNumber > this.range) {
+            rightNumber = this.range;
         }
-        var max = currentPageIndex + rightNumber;
 
-        if (currentPageIndex < maxPageItems - this.Range) {
-            max = Math.min(totalPages - 1, maxPageItems - 1);
+        var max = this.current + rightNumber;
+        if (this.current < this.pageSize - this.range) {
+            max = Math.min(this.total - 1, this.itemSize - 1);
         }
 
-        var min = Math.max(max - (maxPageItems - 1), 0);
+        var min = Math.max(max - (this.itemSize - 1), 0);
 
         for (var i = min; i <= max; i++) {
             var pi = new PaginationItem();
-            pi.ItemPagerIndex = i;
-            pi.ItemText = (i + 1).toString();
-            pi.Description = paginationEnum.Number;
-            pi.IsCurrentIndex = pi.ItemPagerIndex == currentIndex;
+            pi.index = i;
+            pi.text = (i + 1).toString();
+            pi.description = paginationEnum.Number;
+            pi.isCurrent = pi.index == this.current;
             this.items.push(pi);
         }
+
     }
 
-    private FirstPage(currentPageIndex: number) {
-        if (!this.setting.DisplayFirstLastPager)
+    private first() {
+
+        if (!this.setting.isShowFirstLastItem)
             return;
 
-        if (currentPageIndex != 0) {
+        if (this.current != 0) {
             var pi = new PaginationItem();
-            pi.ItemPagerIndex = 0;
-            pi.ItemText = this.setting.FirstPagerText;
-            pi.Description = paginationEnum.First;
+            pi.index = 0;
+            pi.text = this.setting.firstText;
+            pi.description = paginationEnum.First;
             this.items.push(pi);
         }
+
     }
 
-    private GroupNext(maxPageItems: number, totalPages: number, page: number) {
-        if (!this.setting.DisplayPrevNextGroupPager)
+    private nextGroup() {
+
+        if (!this.setting.isShowPrevNextGroupItem)
             return;
 
-        if (((page + 1) * maxPageItems) < totalPages) {
+        var p = this.current / this.itemSize;
+
+        if (((p + 1) * this.itemSize) < this.total) {
             var pi = new PaginationItem();
-            pi.ItemPagerIndex = (page + 1) * maxPageItems;
-            pi.ItemText = this.setting.NextGroupPagerText;
-            pi.Description = paginationEnum.LastGroup;
+            pi.index = (p + 1) * this.itemSize;
+            pi.text = this.setting.nextGroupText;
+            pi.description = paginationEnum.LastGroup;
             this.items.push(pi);
         }
+
     }
 
-    private NextPage(currentPageIndex: number, totalPages: number) {
-        if (!this.setting.DisplayPrevNextPager)
+    private nextPage() {
+
+        if (!this.setting.isShowPrevNextItem)
             return;
 
-        if ((currentPageIndex + 1) < totalPages) {
+        if ((this.current + 1) < this.total) {
             var pi = new PaginationItem();
-            pi.ItemPagerIndex = currentPageIndex + 1;
-            pi.ItemText = this.setting.NextOnePagerText;
-            pi.Description = paginationEnum.Next;
+            pi.index = this.current + 1;
+            pi.text = this.setting.nextOneText;
+            pi.description = paginationEnum.Next;
             this.items.push(pi);
         }
+
     }
 
-    private PrePage(currentPageIndex: number) {
-        if (!this.setting.DisplayPrevNextPager)
+    private prePage() {
+
+        if (!this.setting.isShowPrevNextItem)
             return;
 
-        if (currentPageIndex > 0) {
+        if (this.current > 0) {
             var pi = new PaginationItem();
-            pi.ItemPagerIndex = currentPageIndex - 1;
-            pi.ItemText = this.setting.PrevOnePagerText;
-            pi.Description = paginationEnum.Previous;
+            pi.index = this.current - 1;
+            pi.text = this.setting.PrevOneText;
+            pi.description = paginationEnum.Previous;
             this.items.push(pi);
         }
+        
     }
 
-    private GroupPage(maxPageItems: number, page: number) {
-        if (!this.setting.DisplayPrevNextGroupPager)
+    private preGroup() {
+
+        if (!this.setting.isShowPrevNextGroupItem)
             return;
 
-        if (page > 0) {
+        var p = this.current / this.itemSize;
+        if (p > 0) {
             var pi = new PaginationItem();
-            pi.ItemPagerIndex = (page - 1) * maxPageItems;
-            pi.ItemText = this.setting.PrevGroupPagerText;
-            pi.Description = paginationEnum.FirstGroup;
+            pi.index = (p - 1) * this.itemSize;
+            pi.text = this.setting.prevGroupText;
+            pi.description = paginationEnum.FirstGroup;
             this.items.push(pi);
         }
+
     }
 
-    private LastPage(currentPageIndex: number, totalPages: number) {
-        if (!this.setting.DisplayFirstLastPager)
+    private last() {
+
+        if (!this.setting.isShowFirstLastItem)
             return;
 
-        if (currentPageIndex < totalPages - 1) {
+        if (this.current < this.total - 1) {
             var pi = new PaginationItem();
-            pi.ItemPagerIndex = totalPages - 1;
-            pi.ItemText = this.setting.LastPagerText;
-            pi.Description = paginationEnum.Last;
+            pi.index = this.total - 1;
+            pi.text = this.setting.lastText;
+            pi.description = paginationEnum.Last;
             this.items.push(pi);
         }
+
     }
 
-    public DoProcess(maxPageItems: number, currentIndex: number, totalPages: number) {
-        this.total = totalPages;
+    public DoProcess() {
 
-        var page = currentIndex / maxPageItems;
+        this.first();
+        this.preGroup();
+        this.prePage();
+        this.processItems();
+        this.nextPage();
+        this.nextGroup();
+        this.last();
 
-        this.FirstPage(currentIndex);
-
-        this.GroupPage(maxPageItems, page);
-
-        this.PrePage(currentIndex);
-
-        this.ShowPagerNumber(currentIndex, maxPageItems, currentIndex, totalPages, page);
-
-        this.NextPage(currentIndex, totalPages);
-
-        this.GroupNext(maxPageItems, totalPages, page);
-
-        this.LastPage(currentIndex, totalPages);
     }
 
 }

@@ -2,42 +2,45 @@ import { IPagination } from './IPagination';
 import { PaginationItem } from './paginationItem';
 import { PaginationSetting } from './paginationSetting';
 
-export class PaginationBase implements IPagination {
+export abstract class PaginationBase implements IPagination {
 
-    items: PaginationItem[];
+    items: PaginationItem[] = [];
     setting: PaginationSetting;
-    total: number;
 
     current: number;
-    MaxPagerItems: number;
-    TotalDataItemCount: number;
-    MaxDataItems: number;
+    itemSize: number;
+    dataCount: number;
+    pageSize: number;
 
-    Action: number;
-    Controller: number;
-    InfoObj: any;
+    total: number;
 
     constructor() {
-        this.items = [];
 
+        this.init();
+
+    }
+
+    private init() {
+
+        //default setting
         var ps = new PaginationSetting();
-        ps.FirstPagerText = "<<<"; //"&lt;&lt;&lt;",		//�Ĥ@��
-        ps.LastPagerText = ">>>"; //"&gt;&gt;&gt;",		//�̥���
-        ps.PrevGroupPagerText = "<<"; //"&lt;&lt;",//	//�e10��
-        ps.NextGroupPagerText = ">>"; //"&gt;&gt;",//	//��10��
-        ps.PrevOnePagerText = "<"; //"&lt;",//	//�W�@��
-        ps.NextOnePagerText = ">"; //"&gt;",//	//�U�@��        
-        ps.DisplayFirstLastPager = true; //�O�_���ܲĤ@���γ̥��������r,default=true
-        ps.DisplayPrevNextGroupPager = true; //�O�_���ܫe10���Ϋ�10�������r,default=true
-        ps.DisplayPrevNextPager = true; //�O�_���ܤW�@���ΤU�@�������r,default=true
-
+        ps.firstText = "&lt;&lt;&lt;"; //"<<<"
+        ps.lastText = "&gt;&gt;&gt;"; //">>>"
+        ps.prevGroupText = "&lt;&lt;"; //"<<"
+        ps.nextGroupText = "&gt;&gt;"; //">>"
+        ps.PrevOneText = "&lt;"; //"<"
+        ps.nextOneText = "&gt;"; //">"        
+        ps.isShowFirstLastItem = true;
+        ps.isShowPrevNextGroupItem = true;
+        ps.isShowPrevNextItem = true;
         this.setting = ps;
+
     }
 
     get LastNumber(): number {
-        return (this.current + 1) * this.MaxPagerItems < this.TotalDataItemCount
-            ? (this.current + 1) * this.MaxPagerItems
-            : this.TotalDataItemCount;
+        return (this.current + 1) * this.itemSize < this.dataCount
+            ? (this.current + 1) * this.itemSize
+            : this.dataCount;
     }
 
     get FirstNumber(): number {
@@ -45,24 +48,20 @@ export class PaginationBase implements IPagination {
     }
 
 
-    SetData(maxPageItems: number, currentIndex: number, totalDataItems: number, maxDataItems: number) {
-        this.current = currentIndex;
-        this.MaxPagerItems = maxPageItems;
-        this.TotalDataItemCount = totalDataItems;
-        this.MaxDataItems = maxDataItems;
+    SetData(itemSize: number, current: number, dataCount: number, pageSize: number) {
+        
+        this.current = current;
+        this.itemSize = itemSize;
+        this.dataCount = dataCount;
+        this.pageSize = pageSize;
 
-        //�`����
-        var totalPages = (totalDataItems / maxDataItems) + 1;
-        //�Y���㰣,page�ȭn��1
-        if (totalDataItems % maxDataItems == 0)
-            totalPages--;
+        var totalTmp = (dataCount / pageSize) + 1;
+        if (dataCount % pageSize == 0)
+            totalTmp--;
 
-        this.total = totalPages;
-        this.DoProcess(maxPageItems, currentIndex, totalPages);
+        this.total = totalTmp;
+
     }
 
-    DoProcess(maxPageItems: number, currentIndex: number, totalPageItems: number): void {
-        throw "please implement";
-    }
 
 }

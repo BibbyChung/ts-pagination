@@ -1,10 +1,12 @@
 import { paginationEnum } from './IPagination';
 
 export class PaginationItem {
-    ItemPagerIndex: number;
-    ItemText: string;
-    Description: paginationEnum;
-    IsCurrentIndex: boolean;
-    IsDisable: boolean;
+
+    index: number;
+    text: string;
+    description: paginationEnum;
+    isCurrent: boolean;
+    isDisabled: boolean;
+
 }
 
