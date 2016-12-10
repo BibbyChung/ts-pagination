@@ -5,7 +5,7 @@ export class PagerItem {
     text: string;
     description: PagerEnum;
     isCurrent: boolean;
-    isDisabled: boolean;
+    isShow: boolean;
 
 }
 

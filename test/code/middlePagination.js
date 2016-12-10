@@ -1,6 +1,6 @@
 "use strict";
 const paginationBase_1 = require('./core/paginationBase');
-const pager_1 = require('./core/pager');
+const pagerItem_1 = require('./core/pagerItem');
 class MiddlePagination extends paginationBase_1.PaginationBase {
     constructor(itemSize, current, dataCount, pageSize) {
         super(itemSize, current, dataCount, pageSize);
@@ -17,10 +17,10 @@ class MiddlePagination extends paginationBase_1.PaginationBase {
         }
         let min = Math.max(max - (this.itemSize - 1), 0);
         for (let i = min; i <= max; i++) {
-            let pi = new pager_1.PagerItem();
+            let pi = new pagerItem_1.PagerItem();
             pi.index = i;
             pi.text = (i + 1).toString();
-            pi.description = pager_1.PagerEnum.Number;
+            pi.description = pagerItem_1.PagerEnum.Number;
             pi.isCurrent = pi.index == this.current;
             this.items.push(pi);
         }
@@ -29,10 +29,10 @@ class MiddlePagination extends paginationBase_1.PaginationBase {
         if (!this.setting.isShowFirstLastItem)
             return;
         if (this.current != 0) {
-            let pi = new pager_1.PagerItem();
+            let pi = this.getDefaultPagerItem();
             pi.index = 0;
             pi.text = this.setting.firstText;
-            pi.description = pager_1.PagerEnum.First;
+            pi.description = pagerItem_1.PagerEnum.First;
             this.items.push(pi);
         }
     }
@@ -41,10 +41,10 @@ class MiddlePagination extends paginationBase_1.PaginationBase {
             return;
         let p = this.current / this.itemSize;
         if (((p + 1) * this.itemSize) < this.total) {
-            let pi = new pager_1.PagerItem();
+            let pi = this.getDefaultPagerItem();
             pi.index = (p + 1) * this.itemSize;
             pi.text = this.setting.nextGroupText;
-            pi.description = pager_1.PagerEnum.LastGroup;
+            pi.description = pagerItem_1.PagerEnum.LastGroup;
             this.items.push(pi);
         }
     }
@@ -52,10 +52,10 @@ class MiddlePagination extends paginationBase_1.PaginationBase {
         if (!this.setting.isShowPrevNextItem)
             return;
         if ((this.current + 1) < this.total) {
-            let pi = new pager_1.PagerItem();
+            let pi = this.getDefaultPagerItem();
             pi.index = this.current + 1;
             pi.text = this.setting.nextText;
-            pi.description = pager_1.PagerEnum.Next;
+            pi.description = pagerItem_1.PagerEnum.Next;
             this.items.push(pi);
         }
     }
@@ -63,10 +63,10 @@ class MiddlePagination extends paginationBase_1.PaginationBase {
         if (!this.setting.isShowPrevNextItem)
             return;
         if (this.current > 0) {
-            let pi = new pager_1.PagerItem();
+            let pi = this.getDefaultPagerItem();
             pi.index = this.current - 1;
             pi.text = this.setting.PreText;
-            pi.description = pager_1.PagerEnum.Previous;
+            pi.description = pagerItem_1.PagerEnum.Previous;
             this.items.push(pi);
         }
     }
@@ -75,10 +75,10 @@ class MiddlePagination extends paginationBase_1.PaginationBase {
             return;
         let p = this.current / this.itemSize;
         if (p > 0) {
-            let pi = new pager_1.PagerItem();
+            let pi = this.getDefaultPagerItem();
             pi.index = (p - 1) * this.itemSize;
             pi.text = this.setting.preGroupText;
-            pi.description = pager_1.PagerEnum.FirstGroup;
+            pi.description = pagerItem_1.PagerEnum.FirstGroup;
             this.items.push(pi);
         }
     }
@@ -86,10 +86,10 @@ class MiddlePagination extends paginationBase_1.PaginationBase {
         if (!this.setting.isShowFirstLastItem)
             return;
         if (this.current < this.total - 1) {
-            let pi = new pager_1.PagerItem();
+            let pi = this.getDefaultPagerItem();
             pi.index = this.total - 1;
             pi.text = this.setting.lastText;
-            pi.description = pager_1.PagerEnum.Last;
+            pi.description = pagerItem_1.PagerEnum.Last;
             this.items.push(pi);
         }
     }

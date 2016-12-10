@@ -1,5 +1,5 @@
 import { PaginationBase } from './core/paginationBase';
-import { PagerItem, PagerEnum } from './core/pager';
+import { PagerItem, PagerEnum } from './core/pagerItem';
 
 export class MiddlePagination extends PaginationBase {
 
@@ -45,7 +45,7 @@ export class MiddlePagination extends PaginationBase {
             return;
 
         if (this.current != 0) {
-            let pi = new PagerItem();
+            let pi = this.getDefaultPagerItem();
             pi.index = 0;
             pi.text = this.setting.firstText;
             pi.description = PagerEnum.First;
@@ -62,7 +62,7 @@ export class MiddlePagination extends PaginationBase {
         let p = this.current / this.itemSize;
 
         if (((p + 1) * this.itemSize) < this.total) {
-            let pi = new PagerItem();
+            let pi = this.getDefaultPagerItem();
             pi.index = (p + 1) * this.itemSize;
             pi.text = this.setting.nextGroupText;
             pi.description = PagerEnum.LastGroup;
@@ -77,7 +77,7 @@ export class MiddlePagination extends PaginationBase {
             return;
 
         if ((this.current + 1) < this.total) {
-            let pi = new PagerItem();
+            let pi = this.getDefaultPagerItem();
             pi.index = this.current + 1;
             pi.text = this.setting.nextText;
             pi.description = PagerEnum.Next;
@@ -92,7 +92,7 @@ export class MiddlePagination extends PaginationBase {
             return;
 
         if (this.current > 0) {
-            let pi = new PagerItem();
+            let pi = this.getDefaultPagerItem();
             pi.index = this.current - 1;
             pi.text = this.setting.PreText;
             pi.description = PagerEnum.Previous;
@@ -108,7 +108,7 @@ export class MiddlePagination extends PaginationBase {
 
         let p = this.current / this.itemSize;
         if (p > 0) {
-            let pi = new PagerItem();
+            let pi = this.getDefaultPagerItem();
             pi.index = (p - 1) * this.itemSize;
             pi.text = this.setting.preGroupText;
             pi.description = PagerEnum.FirstGroup;
@@ -123,7 +123,7 @@ export class MiddlePagination extends PaginationBase {
             return;
 
         if (this.current < this.total - 1) {
-            let pi = new PagerItem();
+            let pi = this.getDefaultPagerItem();
             pi.index = this.total - 1;
             pi.text = this.setting.lastText;
             pi.description = PagerEnum.Last;

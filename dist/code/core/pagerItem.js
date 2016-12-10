@@ -12,4 +12,5 @@ exports.PagerItem = PagerItem;
     PagerEnum[PagerEnum["Next"] = 6] = "Next";
 })(exports.PagerEnum || (exports.PagerEnum = {}));
 var PagerEnum = exports.PagerEnum;
-//# sourceMappingURL=pager.js.map
+
+//# sourceMappingURL=pagerItem.js.map

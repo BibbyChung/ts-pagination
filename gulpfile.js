@@ -46,6 +46,89 @@ let getCopyFilesPipe = (sourcePatten, targetPath) => {
 
 };
 
+let addTagForFeatureFiles = () => {
+
+    // creating a stream through which each file will pass
+    let stream = through.obj(function (file, enc, done) {
+        if (file.isBuffer()) {
+
+            let b = getNewBuffer(file.contents);
+            file.contents = b;
+
+        }
+
+        // make sure the file goes through the next gulp plugin
+        this.push(file);
+
+        // tell the stream engine that we are done with this file
+        done();
+    });
+
+    let getNewBuffer = (buffer) => {
+
+        let str = buffer.toString();
+        let arr = str.split("\n");
+
+        if (arr.length == 0)
+            return buffer;
+
+        let id = getSpecialLetters(4);
+        //let id = generateUIDNotMoreThan1million();
+        let newArr = [];
+
+        if (arr[0].indexOf("@") != 0) {
+            newArr.push(`@${id}`);
+        } else {
+            id = arr[0].replace("@", "")
+        }
+
+        for (let item of arr) {
+
+            let s = item;
+            s = replaceSpecialWording(s, "Given", id);
+            s = replaceSpecialWording(s, "When", id);
+            s = replaceSpecialWording(s, "Then", id);
+            s = replaceSpecialWording(s, "And", id);
+            s = replaceSpecialWording(s, "But", id);
+
+            newArr.push(s);
+
+        }
+
+        let newStr = newArr.join("\n");
+        return new Buffer(newStr);
+
+    }
+
+    let replaceSpecialWording = (str, replaceWording, id) => {
+        if (str.indexOf(replaceWording) == -1)
+            return str;
+
+        if (str.indexOf(" ==> ") != -1)
+            return str;
+
+        return str.replace(`${replaceWording} `, `${replaceWording} ${id} ==> `);
+    }
+
+    let getSpecialLetters = (len) => {
+        let chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_',
+            out = '';
+
+        for (let i = 0, clen = chars.length; i < len; i++) {
+            out += chars.substr(0 | Math.random() * clen, 1);
+        }
+
+        return out;
+    }
+
+    let generateUIDNotMoreThan1million = function () {
+        return ("0000" + (Math.random() * Math.pow(36, 4) << 0).toString(36)).slice(-4)
+    }
+
+    return stream;
+
+};
+
 //=================================== Tasks ===================================
 
 gulp.task("clean", (cb) => {
@@ -55,6 +138,14 @@ gulp.task("clean", (cb) => {
     });
 
 });
+
+gulp.task("addTagForFeatureFiles", () => {
+
+    return gulp.src('./src/**/*.feature')
+        .pipe(addTagForFeatureFiles())
+        .pipe(gulp.dest('./src/'));
+
+})
 
 gulp.task("copy_feature_to_test", () => {
 
@@ -134,6 +225,7 @@ gulp.task("create_ts_definitions", shell.task([
 gulp.task('default', (cb) => {
     runSequence(
         "clean",
+        "addTagForFeatureFiles",
         [
             "ts_compile_test",
             "ts_compile_dist",

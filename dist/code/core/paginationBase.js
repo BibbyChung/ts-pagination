@@ -1,4 +1,5 @@
 "use strict";
+const pagerItem_1 = require('./pagerItem');
 const paginationSetting_1 = require('./paginationSetting');
 class PaginationBase {
     constructor(itemSize, current, dataCount, pageSize) {
@@ -28,6 +29,12 @@ class PaginationBase {
         ps.isShowPrevNextGroupItem = true;
         ps.isShowPrevNextItem = true;
         this.setting = ps;
+    }
+    getDefaultPagerItem() {
+        let pi = new pagerItem_1.PagerItem();
+        pi.isCurrent = false;
+        pi.isShow = true;
+        return pi;
     }
 }
 exports.PaginationBase = PaginationBase;

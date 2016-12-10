@@ -1,4 +1,4 @@
-import { PagerItem } from './pager';
+import { PagerItem } from './pagerItem';
 import { PaginationSetting } from './paginationSetting';
 
 export abstract class PaginationBase {
@@ -43,6 +43,15 @@ export abstract class PaginationBase {
         ps.isShowPrevNextGroupItem = true;
         ps.isShowPrevNextItem = true;
         this.setting = ps;
+
+    }
+
+    getDefaultPagerItem() {
+
+        let pi = new PagerItem();
+        pi.isCurrent = false;
+        pi.isShow = true;
+        return pi;
 
     }
 
