@@ -1,0 +1,36 @@
+{
+  "name": "ts-pagination",
+  "version": "1.0.0",
+  "description": "Pagination for Node.js and JavaScript",
+  "main": "./dist/main.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "cucumber.js test/**/*.feature --format pretty"
+  },
+  "repository": {
+    "url": "git+https://github.com/BibbyChung/ts-pagination.git",
+    "type": "git"
+  },
+  "author": "Bibby Chung",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BibbyChung/ts-pagination/issues"
+  },
+  "keywords": [
+    "pagination",
+    "pager"
+  ],
+  "homepage": "https://github.com/BibbyChung/ts-pagination#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-shell": "^0.5.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-typescript": "^2.13.6",
+    "merge-stream": "^1.0.0",
+    "rimraf": "^2.5.4",
+    "run-sequence": "^1.2.2",
+    "through2": "^2.0.1"
+  }
+}
