@@ -7,17 +7,17 @@ class MiddlePagination extends paginationBase_1.PaginationBase {
         this.range = 4;
     }
     processItems() {
-        var rightNumber = this.total - (this.current + 1);
+        let rightNumber = this.total - (this.current + 1);
         if (rightNumber > this.range) {
             rightNumber = this.range;
         }
-        var max = this.current + rightNumber;
+        let max = this.current + rightNumber;
         if (this.current < this.pageSize - this.range) {
             max = Math.min(this.total - 1, this.itemSize - 1);
         }
-        var min = Math.max(max - (this.itemSize - 1), 0);
-        for (var i = min; i <= max; i++) {
-            var pi = new pager_1.PagerItem();
+        let min = Math.max(max - (this.itemSize - 1), 0);
+        for (let i = min; i <= max; i++) {
+            let pi = new pager_1.PagerItem();
             pi.index = i;
             pi.text = (i + 1).toString();
             pi.description = pager_1.PagerEnum.Number;
@@ -29,7 +29,7 @@ class MiddlePagination extends paginationBase_1.PaginationBase {
         if (!this.setting.isShowFirstLastItem)
             return;
         if (this.current != 0) {
-            var pi = new pager_1.PagerItem();
+            let pi = new pager_1.PagerItem();
             pi.index = 0;
             pi.text = this.setting.firstText;
             pi.description = pager_1.PagerEnum.First;
@@ -39,9 +39,9 @@ class MiddlePagination extends paginationBase_1.PaginationBase {
     nextGroup() {
         if (!this.setting.isShowPrevNextGroupItem)
             return;
-        var p = this.current / this.itemSize;
+        let p = this.current / this.itemSize;
         if (((p + 1) * this.itemSize) < this.total) {
-            var pi = new pager_1.PagerItem();
+            let pi = new pager_1.PagerItem();
             pi.index = (p + 1) * this.itemSize;
             pi.text = this.setting.nextGroupText;
             pi.description = pager_1.PagerEnum.LastGroup;
@@ -52,7 +52,7 @@ class MiddlePagination extends paginationBase_1.PaginationBase {
         if (!this.setting.isShowPrevNextItem)
             return;
         if ((this.current + 1) < this.total) {
-            var pi = new pager_1.PagerItem();
+            let pi = new pager_1.PagerItem();
             pi.index = this.current + 1;
             pi.text = this.setting.nextText;
             pi.description = pager_1.PagerEnum.Next;
@@ -63,7 +63,7 @@ class MiddlePagination extends paginationBase_1.PaginationBase {
         if (!this.setting.isShowPrevNextItem)
             return;
         if (this.current > 0) {
-            var pi = new pager_1.PagerItem();
+            let pi = new pager_1.PagerItem();
             pi.index = this.current - 1;
             pi.text = this.setting.PreText;
             pi.description = pager_1.PagerEnum.Previous;
@@ -73,9 +73,9 @@ class MiddlePagination extends paginationBase_1.PaginationBase {
     preGroup() {
         if (!this.setting.isShowPrevNextGroupItem)
             return;
-        var p = this.current / this.itemSize;
+        let p = this.current / this.itemSize;
         if (p > 0) {
-            var pi = new pager_1.PagerItem();
+            let pi = new pager_1.PagerItem();
             pi.index = (p - 1) * this.itemSize;
             pi.text = this.setting.preGroupText;
             pi.description = pager_1.PagerEnum.FirstGroup;
@@ -86,7 +86,7 @@ class MiddlePagination extends paginationBase_1.PaginationBase {
         if (!this.setting.isShowFirstLastItem)
             return;
         if (this.current < this.total - 1) {
-            var pi = new pager_1.PagerItem();
+            let pi = new pager_1.PagerItem();
             pi.index = this.total - 1;
             pi.text = this.setting.lastText;
             pi.description = pager_1.PagerEnum.Last;

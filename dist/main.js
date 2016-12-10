@@ -1,16 +1,16 @@
 "use strict";
 const normalPagination_1 = require('./code/normalPagination');
 const middlePagination_1 = require('./code/middlePagination');
-var normalPager = new normalPagination_1.NormalPagination(3, 22, 345, 10);
-normalPager.build();
-for (var i = 0; i < normalPager.items.length; i++) {
-    var pi = normalPager.items[i];
+let normal = new normalPagination_1.NormalPagination(3, 22, 345, 10);
+normal.build();
+for (let i = 0; i < normal.items.length; i++) {
+    let pi = normal.items[i];
     console.log(pi.text);
 }
-var middlePager = new middlePagination_1.MiddlePagination(9, 10, 1000, 10);
-middlePager.build();
-for (var i = 0; i < middlePager.items.length; i++) {
-    var pi = middlePager.items[i];
+let middle = new middlePagination_1.MiddlePagination(9, 10, 1000, 10);
+middle.build();
+for (let i = 0; i < middle.items.length; i++) {
+    let pi = middle.items[i];
     console.log(pi.text);
 }
 

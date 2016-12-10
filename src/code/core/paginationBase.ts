@@ -21,7 +21,7 @@ export abstract class PaginationBase {
 
     private setTotal() {
 
-        var totalTmp = (this.dataCount / this.pageSize) + 1;
+        let totalTmp = (this.dataCount / this.pageSize) + 1;
         if (this.dataCount % this.pageSize == 0)
             totalTmp--;
 
@@ -32,7 +32,7 @@ export abstract class PaginationBase {
 
     private setDefaultSetting() {
 
-        var ps = new PaginationSetting();
+        let ps = new PaginationSetting();
         ps.firstText = "&lt;&lt;&lt;"; //"<<<"
         ps.lastText = "&gt;&gt;&gt;"; //">>>"
         ps.preGroupText = "&lt;&lt;"; //"<<"

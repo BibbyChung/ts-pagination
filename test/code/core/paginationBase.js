@@ -11,13 +11,13 @@ class PaginationBase {
         this.setTotal();
     }
     setTotal() {
-        var totalTmp = (this.dataCount / this.pageSize) + 1;
+        let totalTmp = (this.dataCount / this.pageSize) + 1;
         if (this.dataCount % this.pageSize == 0)
             totalTmp--;
         this.total = totalTmp;
     }
     setDefaultSetting() {
-        var ps = new paginationSetting_1.PaginationSetting();
+        let ps = new paginationSetting_1.PaginationSetting();
         ps.firstText = "&lt;&lt;&lt;"; //"<<<"
         ps.lastText = "&gt;&gt;&gt;"; //">>>"
         ps.preGroupText = "&lt;&lt;"; //"<<"

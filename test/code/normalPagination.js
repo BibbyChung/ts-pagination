@@ -6,10 +6,10 @@ class NormalPagination extends paginationBase_1.PaginationBase {
         super(itemSize, current, dataCount, pageSize);
     }
     processItems() {
-        var p = this.current / this.itemSize;
-        var count = Math.min(this.itemSize, this.total - (p * this.itemSize));
-        for (var i = 1; i <= count; i++) {
-            var pi = new Pager_1.PagerItem();
+        let p = this.current / this.itemSize;
+        let count = Math.min(this.itemSize, this.total - (p * this.itemSize));
+        for (let i = 1; i <= count; i++) {
+            let pi = new Pager_1.PagerItem();
             pi.index = (p * this.itemSize) + i - 1;
             pi.text = ((p * this.itemSize) + i).toString();
             pi.description = Pager_1.PagerEnum.Number;
@@ -21,7 +21,7 @@ class NormalPagination extends paginationBase_1.PaginationBase {
         if (!this.setting.isShowFirstLastItem)
             return;
         if (this.current != 0) {
-            var pi = new Pager_1.PagerItem();
+            let pi = new Pager_1.PagerItem();
             pi.index = 0;
             pi.text = this.setting.firstText;
             pi.description = Pager_1.PagerEnum.First;
@@ -31,9 +31,9 @@ class NormalPagination extends paginationBase_1.PaginationBase {
     nextGroup() {
         if (!this.setting.isShowPrevNextGroupItem)
             return;
-        var p = this.current / this.itemSize;
+        let p = this.current / this.itemSize;
         if (((p + 1) * this.itemSize) < this.total) {
-            var pi = new Pager_1.PagerItem();
+            let pi = new Pager_1.PagerItem();
             pi.index = (p + 1) * this.itemSize;
             pi.text = this.setting.nextGroupText;
             pi.description = Pager_1.PagerEnum.LastGroup;
@@ -43,7 +43,7 @@ class NormalPagination extends paginationBase_1.PaginationBase {
     nextItem() {
         if (!this.setting.isShowPrevNextItem)
             return;
-        var pi = new Pager_1.PagerItem();
+        let pi = new Pager_1.PagerItem();
         pi.index = this.current + 1;
         pi.text = this.setting.nextText;
         pi.description = Pager_1.PagerEnum.Next;
@@ -55,7 +55,7 @@ class NormalPagination extends paginationBase_1.PaginationBase {
     preItem() {
         if (!this.setting.isShowPrevNextItem)
             return;
-        var pi = new Pager_1.PagerItem();
+        let pi = new Pager_1.PagerItem();
         pi.index = this.current - 1;
         pi.text = this.setting.PreText;
         pi.description = Pager_1.PagerEnum.Previous;
@@ -67,9 +67,9 @@ class NormalPagination extends paginationBase_1.PaginationBase {
     preGroup() {
         if (!this.setting.isShowPrevNextGroupItem)
             return;
-        var p = this.current / this.itemSize;
+        let p = this.current / this.itemSize;
         if (p > 0) {
-            var pi = new Pager_1.PagerItem();
+            let pi = new Pager_1.PagerItem();
             pi.index = (p - 1) * this.itemSize;
             pi.text = this.setting.preGroupText;
             pi.description = Pager_1.PagerEnum.FirstGroup;
@@ -80,7 +80,7 @@ class NormalPagination extends paginationBase_1.PaginationBase {
         if (!this.setting.isShowFirstLastItem)
             return;
         if (this.current < this.total - 1) {
-            var pi = new Pager_1.PagerItem();
+            let pi = new Pager_1.PagerItem();
             pi.index = this.total - 1;
             pi.text = this.setting.lastText;
             pi.description = Pager_1.PagerEnum.Last;
