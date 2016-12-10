@@ -2,10 +2,10 @@ export class PaginationSetting {
 
     firstText: string;
     lastText: string;
-    prevGroupText: string;
+    preGroupText: string;
     nextGroupText: string;
-    PrevOneText: string;
-    nextOneText: string;
+    PreText: string;
+    nextText: string;
 
     isShowFirstLastItem: boolean;
     isShowPrevNextGroupItem: boolean;

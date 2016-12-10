@@ -1,10 +1,9 @@
 "use strict";
 const paginationBase_1 = require('./core/paginationBase');
-const paginationItem_1 = require('./core/paginationItem');
-const IPagination_1 = require('./core/IPagination');
+const pager_1 = require('./core/pager');
 class MiddlePagination extends paginationBase_1.PaginationBase {
-    constructor() {
-        super();
+    constructor(itemSize, current, dataCount, pageSize) {
+        super(itemSize, current, dataCount, pageSize);
         this.range = 4;
     }
     processItems() {
@@ -18,10 +17,10 @@ class MiddlePagination extends paginationBase_1.PaginationBase {
         }
         var min = Math.max(max - (this.itemSize - 1), 0);
         for (var i = min; i <= max; i++) {
-            var pi = new paginationItem_1.PaginationItem();
+            var pi = new pager_1.PagerItem();
             pi.index = i;
             pi.text = (i + 1).toString();
-            pi.description = IPagination_1.paginationEnum.Number;
+            pi.description = pager_1.PagerEnum.Number;
             pi.isCurrent = pi.index == this.current;
             this.items.push(pi);
         }
@@ -30,10 +29,10 @@ class MiddlePagination extends paginationBase_1.PaginationBase {
         if (!this.setting.isShowFirstLastItem)
             return;
         if (this.current != 0) {
-            var pi = new paginationItem_1.PaginationItem();
+            var pi = new pager_1.PagerItem();
             pi.index = 0;
             pi.text = this.setting.firstText;
-            pi.description = IPagination_1.paginationEnum.First;
+            pi.description = pager_1.PagerEnum.First;
             this.items.push(pi);
         }
     }
@@ -42,32 +41,32 @@ class MiddlePagination extends paginationBase_1.PaginationBase {
             return;
         var p = this.current / this.itemSize;
         if (((p + 1) * this.itemSize) < this.total) {
-            var pi = new paginationItem_1.PaginationItem();
+            var pi = new pager_1.PagerItem();
             pi.index = (p + 1) * this.itemSize;
             pi.text = this.setting.nextGroupText;
-            pi.description = IPagination_1.paginationEnum.LastGroup;
+            pi.description = pager_1.PagerEnum.LastGroup;
             this.items.push(pi);
         }
     }
-    nextPage() {
+    nextItem() {
         if (!this.setting.isShowPrevNextItem)
             return;
         if ((this.current + 1) < this.total) {
-            var pi = new paginationItem_1.PaginationItem();
+            var pi = new pager_1.PagerItem();
             pi.index = this.current + 1;
-            pi.text = this.setting.nextOneText;
-            pi.description = IPagination_1.paginationEnum.Next;
+            pi.text = this.setting.nextText;
+            pi.description = pager_1.PagerEnum.Next;
             this.items.push(pi);
         }
     }
-    prePage() {
+    preItem() {
         if (!this.setting.isShowPrevNextItem)
             return;
         if (this.current > 0) {
-            var pi = new paginationItem_1.PaginationItem();
+            var pi = new pager_1.PagerItem();
             pi.index = this.current - 1;
-            pi.text = this.setting.PrevOneText;
-            pi.description = IPagination_1.paginationEnum.Previous;
+            pi.text = this.setting.PreText;
+            pi.description = pager_1.PagerEnum.Previous;
             this.items.push(pi);
         }
     }
@@ -76,10 +75,10 @@ class MiddlePagination extends paginationBase_1.PaginationBase {
             return;
         var p = this.current / this.itemSize;
         if (p > 0) {
-            var pi = new paginationItem_1.PaginationItem();
+            var pi = new pager_1.PagerItem();
             pi.index = (p - 1) * this.itemSize;
-            pi.text = this.setting.prevGroupText;
-            pi.description = IPagination_1.paginationEnum.FirstGroup;
+            pi.text = this.setting.preGroupText;
+            pi.description = pager_1.PagerEnum.FirstGroup;
             this.items.push(pi);
         }
     }
@@ -87,19 +86,19 @@ class MiddlePagination extends paginationBase_1.PaginationBase {
         if (!this.setting.isShowFirstLastItem)
             return;
         if (this.current < this.total - 1) {
-            var pi = new paginationItem_1.PaginationItem();
+            var pi = new pager_1.PagerItem();
             pi.index = this.total - 1;
             pi.text = this.setting.lastText;
-            pi.description = IPagination_1.paginationEnum.Last;
+            pi.description = pager_1.PagerEnum.Last;
             this.items.push(pi);
         }
     }
-    DoProcess() {
+    build() {
         this.first();
         this.preGroup();
-        this.prePage();
+        this.preItem();
         this.processItems();
-        this.nextPage();
+        this.nextItem();
         this.nextGroup();
         this.last();
     }

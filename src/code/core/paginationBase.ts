@@ -1,35 +1,44 @@
-import { IPagination } from './IPagination';
-import { PaginationItem } from './paginationItem';
+import { PagerItem } from './pager';
 import { PaginationSetting } from './paginationSetting';
 
-export abstract class PaginationBase implements IPagination {
+export abstract class PaginationBase {
 
-    items: PaginationItem[] = [];
+    items: PagerItem[] = [];
     setting: PaginationSetting;
-
-    current: number;
-    itemSize: number;
-    dataCount: number;
-    pageSize: number;
-
     total: number;
 
-    constructor() {
+    constructor(
+        public itemSize: number,
+        public current: number,
+        public dataCount: number,
+        public pageSize: number
+    ) {
 
-        this.init();
+        this.setDefaultSetting();
+        this.setTotal();
 
     }
 
-    private init() {
+    private setTotal() {
 
-        //default setting
+        var totalTmp = (this.dataCount / this.pageSize) + 1;
+        if (this.dataCount % this.pageSize == 0)
+            totalTmp--;
+
+        this.total = totalTmp;
+
+    }
+
+
+    private setDefaultSetting() {
+
         var ps = new PaginationSetting();
         ps.firstText = "&lt;&lt;&lt;"; //"<<<"
         ps.lastText = "&gt;&gt;&gt;"; //">>>"
-        ps.prevGroupText = "&lt;&lt;"; //"<<"
+        ps.preGroupText = "&lt;&lt;"; //"<<"
         ps.nextGroupText = "&gt;&gt;"; //">>"
-        ps.PrevOneText = "&lt;"; //"<"
-        ps.nextOneText = "&gt;"; //">"        
+        ps.PreText = "&lt;"; //"<"
+        ps.nextText = "&gt;"; //">"        
         ps.isShowFirstLastItem = true;
         ps.isShowPrevNextGroupItem = true;
         ps.isShowPrevNextItem = true;
@@ -37,31 +46,6 @@ export abstract class PaginationBase implements IPagination {
 
     }
 
-    get LastNumber(): number {
-        return (this.current + 1) * this.itemSize < this.dataCount
-            ? (this.current + 1) * this.itemSize
-            : this.dataCount;
-    }
-
-    get FirstNumber(): number {
-        return (this.current * 10) + 1;
-    }
-
-
-    SetData(itemSize: number, current: number, dataCount: number, pageSize: number) {
-        
-        this.current = current;
-        this.itemSize = itemSize;
-        this.dataCount = dataCount;
-        this.pageSize = pageSize;
-
-        var totalTmp = (dataCount / pageSize) + 1;
-        if (dataCount % pageSize == 0)
-            totalTmp--;
-
-        this.total = totalTmp;
-
-    }
-
+    abstract build();
 
 }

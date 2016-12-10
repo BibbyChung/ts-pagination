@@ -1,41 +1,33 @@
 "use strict";
 const paginationSetting_1 = require('./paginationSetting');
 class PaginationBase {
-    constructor() {
+    constructor(itemSize, current, dataCount, pageSize) {
+        this.itemSize = itemSize;
+        this.current = current;
+        this.dataCount = dataCount;
+        this.pageSize = pageSize;
         this.items = [];
-        this.init();
+        this.setDefaultSetting();
+        this.setTotal();
     }
-    init() {
-        //default setting
+    setTotal() {
+        var totalTmp = (this.dataCount / this.pageSize) + 1;
+        if (this.dataCount % this.pageSize == 0)
+            totalTmp--;
+        this.total = totalTmp;
+    }
+    setDefaultSetting() {
         var ps = new paginationSetting_1.PaginationSetting();
         ps.firstText = "&lt;&lt;&lt;"; //"<<<"
         ps.lastText = "&gt;&gt;&gt;"; //">>>"
-        ps.prevGroupText = "&lt;&lt;"; //"<<"
+        ps.preGroupText = "&lt;&lt;"; //"<<"
         ps.nextGroupText = "&gt;&gt;"; //">>"
-        ps.PrevOneText = "&lt;"; //"<"
-        ps.nextOneText = "&gt;"; //">"        
+        ps.PreText = "&lt;"; //"<"
+        ps.nextText = "&gt;"; //">"        
         ps.isShowFirstLastItem = true;
         ps.isShowPrevNextGroupItem = true;
         ps.isShowPrevNextItem = true;
         this.setting = ps;
-    }
-    get LastNumber() {
-        return (this.current + 1) * this.itemSize < this.dataCount
-            ? (this.current + 1) * this.itemSize
-            : this.dataCount;
-    }
-    get FirstNumber() {
-        return (this.current * 10) + 1;
-    }
-    SetData(itemSize, current, dataCount, pageSize) {
-        this.current = current;
-        this.itemSize = itemSize;
-        this.dataCount = dataCount;
-        this.pageSize = pageSize;
-        var totalTmp = (dataCount / pageSize) + 1;
-        if (dataCount % pageSize == 0)
-            totalTmp--;
-        this.total = totalTmp;
     }
 }
 exports.PaginationBase = PaginationBase;
