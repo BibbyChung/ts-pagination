@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 const assert = require("assert");
 require("./../extensions");
-const normalPagination_1 = require('../code/normalPagination');
+const simplePagination_1 = require('../code/simplePagination');
 let prepareToRun = (_self, tag) => {
     _self.Before({ tags: [tag] }, (scenario) => __awaiter(this, void 0, void 0, function* () {
     }));
@@ -25,7 +25,7 @@ module.exports = function () {
         pageInfo = table.hashes().toConvertType()[0];
     });
     this.When(/^ud_G ==> prepare the normal pagination\.$/, function () {
-        pagination = new normalPagination_1.NormalPagination(pageInfo.itemSize, pageInfo.current, pageInfo.dataCount, pageInfo.pageSize);
+        pagination = new simplePagination_1.SimplePagination(pageInfo.itemSize, pageInfo.current, pageInfo.dataCount, pageInfo.pageSize);
         pagination.build();
     });
     this.Then(/^ud_G ==> the page items should equal those data\.$/, function (table) {
@@ -48,4 +48,4 @@ module.exports = function () {
         assert.equal(act.current, exp.current);
     });
 };
-//# sourceMappingURL=normalPagination.js.map
+//# sourceMappingURL=simplePagination.js.map

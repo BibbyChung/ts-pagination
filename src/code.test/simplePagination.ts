@@ -1,9 +1,8 @@
 /// <reference path="./../../typings/index.d.ts" />
 
-
 import * as assert from "assert";
 import "./../extensions";
-import { NormalPagination } from '../code/normalPagination';
+import { SimplePagination } from '../code/simplePagination';
 import { PagerItem } from '../code/core/pagerItem';
 
 let prepareToRun = (_self, tag: string) => {
@@ -25,7 +24,7 @@ export = function () {
         dataCount: number,
         pageSize: number
     };
-    var pagination: NormalPagination;
+    var pagination: SimplePagination;
 
     this.Given(/^ud_G ==> prepare the pagination data\.$/, function (table) {
 
@@ -34,7 +33,7 @@ export = function () {
     });
     this.When(/^ud_G ==> prepare the normal pagination\.$/, function () {
 
-        pagination = new NormalPagination(pageInfo.itemSize, pageInfo.current, pageInfo.dataCount, pageInfo.pageSize);
+        pagination = new SimplePagination(pageInfo.itemSize, pageInfo.current, pageInfo.dataCount, pageInfo.pageSize);
         pagination.build();
 
     });

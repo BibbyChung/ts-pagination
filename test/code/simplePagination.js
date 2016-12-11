@@ -1,7 +1,7 @@
 "use strict";
 const paginationBase_1 = require('./core/paginationBase');
 const PagerItem_1 = require('./core/PagerItem');
-class NormalPagination extends paginationBase_1.PaginationBase {
+class SimplePagination extends paginationBase_1.PaginationBase {
     constructor(itemSize, current, dataCount, pageSize) {
         super(itemSize, current, dataCount, pageSize);
     }
@@ -103,5 +103,5 @@ class NormalPagination extends paginationBase_1.PaginationBase {
         this.last();
     }
 }
-exports.NormalPagination = NormalPagination;
-//# sourceMappingURL=normalPagination.js.map
+exports.SimplePagination = SimplePagination;
+//# sourceMappingURL=simplePagination.js.map
