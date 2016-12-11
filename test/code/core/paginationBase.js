@@ -12,15 +12,12 @@ class PaginationBase {
         this.setTotal();
     }
     setTotal() {
-        let totalTmp = (this.dataCount / this.pageSize) + 1;
-        if (this.dataCount % this.pageSize == 0)
-            totalTmp--;
-        this.total = totalTmp;
+        this.total = Math.ceil(this.dataCount / this.pageSize);
     }
     setDefaultSetting() {
         let ps = new paginationSetting_1.PaginationSetting();
-        ps.firstText = "&lt;&lt;&lt;"; //"<<<"
-        ps.lastText = "&gt;&gt;&gt;"; //">>>"
+        ps.firstText = "first"; //"<<<"
+        ps.lastText = "last"; //">>>"
         ps.preGroupText = "&lt;&lt;"; //"<<"
         ps.nextGroupText = "&gt;&gt;"; //">>"
         ps.PreText = "&lt;"; //"<"
@@ -33,7 +30,7 @@ class PaginationBase {
     getDefaultPagerItem() {
         let pi = new pagerItem_1.PagerItem();
         pi.isCurrent = false;
-        pi.isShow = true;
+        pi.isEnabled = true;
         return pi;
     }
 }

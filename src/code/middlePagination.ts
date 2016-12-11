@@ -32,7 +32,7 @@ export class MiddlePagination extends PaginationBase {
             let pi = new PagerItem();
             pi.index = i;
             pi.text = (i + 1).toString();
-            pi.description = PagerEnum.Number;
+            pi.type = PagerEnum.Number;
             pi.isCurrent = pi.index == this.current;
             this.items.push(pi);
         }
@@ -48,7 +48,7 @@ export class MiddlePagination extends PaginationBase {
             let pi = this.getDefaultPagerItem();
             pi.index = 0;
             pi.text = this.setting.firstText;
-            pi.description = PagerEnum.First;
+            pi.type = PagerEnum.First;
             this.items.push(pi);
         }
 
@@ -65,7 +65,7 @@ export class MiddlePagination extends PaginationBase {
             let pi = this.getDefaultPagerItem();
             pi.index = (p + 1) * this.itemSize;
             pi.text = this.setting.nextGroupText;
-            pi.description = PagerEnum.LastGroup;
+            pi.type = PagerEnum.NextGroup;
             this.items.push(pi);
         }
 
@@ -80,7 +80,7 @@ export class MiddlePagination extends PaginationBase {
             let pi = this.getDefaultPagerItem();
             pi.index = this.current + 1;
             pi.text = this.setting.nextText;
-            pi.description = PagerEnum.Next;
+            pi.type = PagerEnum.Next;
             this.items.push(pi);
         }
 
@@ -95,7 +95,7 @@ export class MiddlePagination extends PaginationBase {
             let pi = this.getDefaultPagerItem();
             pi.index = this.current - 1;
             pi.text = this.setting.PreText;
-            pi.description = PagerEnum.Previous;
+            pi.type = PagerEnum.Previous;
             this.items.push(pi);
         }
 
@@ -111,7 +111,7 @@ export class MiddlePagination extends PaginationBase {
             let pi = this.getDefaultPagerItem();
             pi.index = (p - 1) * this.itemSize;
             pi.text = this.setting.preGroupText;
-            pi.description = PagerEnum.FirstGroup;
+            pi.type = PagerEnum.PreGroup;
             this.items.push(pi);
         }
 
@@ -126,7 +126,7 @@ export class MiddlePagination extends PaginationBase {
             let pi = this.getDefaultPagerItem();
             pi.index = this.total - 1;
             pi.text = this.setting.lastText;
-            pi.description = PagerEnum.Last;
+            pi.type = PagerEnum.Last;
             this.items.push(pi);
         }
 

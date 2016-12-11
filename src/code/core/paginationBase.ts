@@ -21,11 +21,7 @@ export abstract class PaginationBase {
 
     private setTotal() {
 
-        let totalTmp = (this.dataCount / this.pageSize) + 1;
-        if (this.dataCount % this.pageSize == 0)
-            totalTmp--;
-
-        this.total = totalTmp;
+        this.total = Math.ceil(this.dataCount / this.pageSize);
 
     }
 
@@ -33,8 +29,8 @@ export abstract class PaginationBase {
     private setDefaultSetting() {
 
         let ps = new PaginationSetting();
-        ps.firstText = "&lt;&lt;&lt;"; //"<<<"
-        ps.lastText = "&gt;&gt;&gt;"; //">>>"
+        ps.firstText = "first"; //"<<<"
+        ps.lastText = "last"; //">>>"
         ps.preGroupText = "&lt;&lt;"; //"<<"
         ps.nextGroupText = "&gt;&gt;"; //">>"
         ps.PreText = "&lt;"; //"<"
@@ -50,7 +46,7 @@ export abstract class PaginationBase {
 
         let pi = new PagerItem();
         pi.isCurrent = false;
-        pi.isShow = true;
+        pi.isEnabled = true;
         return pi;
 
     }

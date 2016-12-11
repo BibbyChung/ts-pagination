@@ -21,21 +21,31 @@ module.exports = function () {
     prepareToRun(this, "@ud_G");
     var pageInfo;
     var pagination;
-    this.Given(/^ud_G ==> prepare the data\.$/, function (table) {
+    this.Given(/^ud_G ==> prepare the pagination data\.$/, function (table) {
         pageInfo = table.hashes().toConvertType()[0];
     });
-    this.When(/^ud_G ==> intial the normal pagination\.$/, function () {
+    this.When(/^ud_G ==> prepare the normal pagination\.$/, function () {
         pagination = new normalPagination_1.NormalPagination(pageInfo.itemSize, pageInfo.current, pageInfo.dataCount, pageInfo.pageSize);
         pagination.build();
     });
-    this.Then(/^ud_G ==> the result should equal those data\.$/, function (table) {
+    this.Then(/^ud_G ==> the page items should equal those data\.$/, function (table) {
+        let expArr = table.hashes().toConvertType();
+        let actArr = pagination.items;
+        for (let i = 0; i < actArr.length; i++) {
+            let exp = expArr[i];
+            let act = actArr[i];
+            assert.equal(act.type, exp.type);
+            assert.equal(act.index, exp.index);
+            assert.equal(act.isCurrent, exp.isCurrent);
+            assert.equal(act.isEnabled, exp.isEnabled);
+            assert.equal(act.text, exp.text);
+        }
+    });
+    this.Then(/^ud_G ==> the pagination should equal those data\.$/, function (table) {
         let exp = table.hashes().toConvertType()[0];
-        let act = pagination.items[0];
-        assert.equal(act.description, exp.description);
-        assert.equal(act.index, exp.index);
-        assert.equal(act.isCurrent, exp.isCurrent);
-        assert.equal(act.isShow, exp.isShow);
-        assert.equal(act.text, exp.text);
+        let act = pagination;
+        assert.equal(act.total, exp.total);
+        assert.equal(act.current, exp.current);
     });
 };
 //# sourceMappingURL=normalPagination.js.map

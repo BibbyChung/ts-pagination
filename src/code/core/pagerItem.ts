@@ -3,20 +3,20 @@ export class PagerItem {
 
     index: number;
     text: string;
-    description: PagerEnum;
+    type: PagerEnum;
     isCurrent: boolean;
-    isShow: boolean;
+    isEnabled: boolean;
 
 }
 
 export enum PagerEnum {
 
-    Number,
-    First,
-    Last,
-    FirstGroup,
-    LastGroup,
-    Previous,
-    Next
+    Number = 0,
+    First = 1,
+    Last = 2,
+    PreGroup = 3,
+    NextGroup = 4,
+    Previous = 5,
+    Next = 6
 
 }
