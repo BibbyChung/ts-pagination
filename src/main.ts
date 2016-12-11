@@ -4,13 +4,13 @@ import { PaginationBase } from './code/core/paginationBase';
 
 import { SimplePagination } from './code/simplePagination';
 
-// let normal = new NormalPagination(3, 11, 64, 5);
-// normal.build();
-// for (let p of normal.items) {
+// let simpleP = new SimplePagination(3, 11, 64, 5);
+// simpleP.build();
+// for (let p of simpleP.items) {
 //     console.log(p);
 // }
-// console.log("total", normal.total);
-// console.log("current", normal.current);
+// console.log("total", simpleP.total);
+// console.log("current", simpleP.current);
 
 //import { MiddlePagination } from './code/middlePagination';
 
