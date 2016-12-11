@@ -19,9 +19,7 @@ class NormalPagination extends paginationBase_1.PaginationBase {
     preGroup() {
         if (!this.setting.isShowPrevNextGroupItem)
             return;
-        let p = Math.floor((this.current + 1) / this.itemSize);
-        if (((this.current + 1) % this.itemSize) == 0)
-            p--;
+        let p = this.getCurrentPagerStatus();
         if (p <= 0)
             return;
         let pi = this.getDefaultPagerItem();
@@ -43,9 +41,7 @@ class NormalPagination extends paginationBase_1.PaginationBase {
         }
     }
     processItems() {
-        let p = Math.floor((this.current + 1) / this.itemSize);
-        if (((this.current + 1) % this.itemSize) == 0)
-            p--;
+        let p = this.getCurrentPagerStatus();
         let count = Math.min(this.itemSize, this.total - (p * this.itemSize));
         for (let i = 1; i <= count; i++) {
             let pi = this.getDefaultPagerItem();
@@ -71,9 +67,7 @@ class NormalPagination extends paginationBase_1.PaginationBase {
     nextGroup() {
         if (!this.setting.isShowPrevNextGroupItem)
             return;
-        let p = Math.floor((this.current + 1) / this.itemSize);
-        if (((this.current + 1) % this.itemSize) == 0)
-            p--;
+        let p = this.getCurrentPagerStatus();
         if ((p + 1) * this.itemSize >= this.total)
             return;
         let pi = this.getDefaultPagerItem();
@@ -92,6 +86,12 @@ class NormalPagination extends paginationBase_1.PaginationBase {
         pi.text = this.setting.lastText;
         pi.type = PagerItem_1.PagerEnum.Last;
         this.items.push(pi);
+    }
+    getCurrentPagerStatus() {
+        let p = Math.floor((this.current + 1) / this.itemSize);
+        if (((this.current + 1) % this.itemSize) == 0)
+            p--;
+        return p;
     }
     build() {
         this.first();
