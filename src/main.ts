@@ -1,7 +1,7 @@
 import { NormalPagination } from './code/normalPagination';
 import { MiddlePagination } from './code/middlePagination';
 
-let normal = new NormalPagination(3, 9, 63, 5);
+let normal = new NormalPagination(3, 11, 64, 5);
 normal.build();
 for (let p of normal.items) {
     console.log(p);

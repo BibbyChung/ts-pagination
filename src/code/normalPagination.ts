@@ -36,7 +36,9 @@ export class NormalPagination extends PaginationBase {
             return;
 
         let p = Math.floor((this.current + 1) / this.itemSize);
-        if (p == 0)
+        if (((this.current + 1) % this.itemSize) == 0)
+            p--;
+        if (p <= 0)
             return;
 
         let pi = this.getDefaultPagerItem();
@@ -65,8 +67,10 @@ export class NormalPagination extends PaginationBase {
     }
 
     private processItems() {
-
+        
         let p = Math.floor((this.current + 1) / this.itemSize);
+        if (((this.current + 1) % this.itemSize) == 0)
+            p--;
         let count = Math.min(this.itemSize, this.total - (p * this.itemSize));
 
         for (let i = 1; i <= count; i++) {
@@ -103,7 +107,10 @@ export class NormalPagination extends PaginationBase {
             return;
 
         let p = Math.floor((this.current + 1) / this.itemSize);
-        if ((p + 1) * this.itemSize >= this.dataCount)
+        if (((this.current + 1) % this.itemSize) == 0)
+            p--;
+
+        if ((p + 1) * this.itemSize >= this.total)
             return;
 
         let pi = this.getDefaultPagerItem();

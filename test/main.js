@@ -1,6 +1,6 @@
 "use strict";
 const normalPagination_1 = require('./code/normalPagination');
-let normal = new normalPagination_1.NormalPagination(3, 9, 63, 5);
+let normal = new normalPagination_1.NormalPagination(3, 11, 64, 5);
 normal.build();
 for (let p of normal.items) {
     console.log(p);
