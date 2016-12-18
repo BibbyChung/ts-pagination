@@ -35,13 +35,13 @@ Array.prototype.toConvertType = function <T>() {
             }
 
             let postfix = pArr[1];
-            if (postfix == "number") {
+            if (postfix == "Number") {
                 newObj[newP] = parseFloat(v);
             }
             if (postfix == "Date") {
                 newObj[newP] = new Date(v);
             }
-            if (postfix == "boolean") {
+            if (postfix == "Boolean") {
                 newObj[newP] = (v === 'true');
             }
 
