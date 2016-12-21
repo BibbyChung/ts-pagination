@@ -17,6 +17,11 @@ export abstract class PaginationBase {
         this.setDefaultSetting();
         this.setTotal();
 
+        this.itemSize = parseInt(this.itemSize.toString());
+        this.current = parseInt(this.current.toString());
+        this.dataCount = parseInt(this.dataCount.toString());
+        this.pageSize = parseInt(this.pageSize.toString());
+
     }
 
     private setTotal() {
