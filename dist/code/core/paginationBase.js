@@ -20,12 +20,12 @@ class PaginationBase {
     }
     setDefaultSetting() {
         let ps = new paginationSetting_1.PaginationSetting();
-        ps.firstText = "first"; //"<<<"
-        ps.lastText = "last"; //">>>"
-        ps.preGroupText = "&lt;&lt;"; //"<<"
-        ps.nextGroupText = "&gt;&gt;"; //">>"
-        ps.PreText = "&lt;"; //"<"
-        ps.nextText = "&gt;"; //">"        
+        ps.firstText = "first";
+        ps.lastText = "last";
+        ps.preGroupText = "<<";
+        ps.nextGroupText = ">>";
+        ps.PreText = "<";
+        ps.nextText = ">";
         ps.isShowFirstLastItem = true;
         ps.isShowPrevNextGroupItem = true;
         ps.isShowPrevNextItem = true;

@@ -34,12 +34,12 @@ export abstract class PaginationBase {
     private setDefaultSetting() {
 
         let ps = new PaginationSetting();
-        ps.firstText = "first"; //"<<<"
-        ps.lastText = "last"; //">>>"
-        ps.preGroupText = "&lt;&lt;"; //"<<"
-        ps.nextGroupText = "&gt;&gt;"; //">>"
-        ps.PreText = "&lt;"; //"<"
-        ps.nextText = "&gt;"; //">"        
+        ps.firstText = "first";
+        ps.lastText = "last";
+        ps.preGroupText = "<<";
+        ps.nextGroupText = ">>";
+        ps.PreText = "<";
+        ps.nextText = ">";
         ps.isShowFirstLastItem = true;
         ps.isShowPrevNextGroupItem = true;
         ps.isShowPrevNextItem = true;

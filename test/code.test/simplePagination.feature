@@ -6,16 +6,16 @@ Feature: test the normal pagination.
       | 3               | 9              | 64               | 5               | 
      When ud_G ==> prepare the normal pagination.
      Then ud_G ==> the page items should equal those data.
-      | isCurrent:Boolean | isEnabled:Boolean | index:Number | text     | type | 
-      | false             | true              | 0            | first    | 1    | 
-      | false             | true              | 6            | &lt;&lt; | 3    | 
-      | false             | true              | 8            | &lt;     | 5    | 
-      | true              | true              | 9            | 10       | 0    | 
-      | false             | true              | 10           | 11       | 0    | 
-      | false             | true              | 11           | 12       | 0    | 
-      | false             | true              | 10           | &gt;     | 6    | 
-      | false             | true              | 12           | &gt;&gt; | 4    | 
-      | false             | true              | 12           | last     | 2    | 
+      | isCurrent:Boolean | isEnabled:Boolean | index:Number | text  | type | 
+      | false             | true              | 0            | first | 1    | 
+      | false             | true              | 6            | <<    | 3    | 
+      | false             | true              | 8            | <     | 5    | 
+      | true              | true              | 9            | 10    | 0    | 
+      | false             | true              | 10           | 11    | 0    | 
+      | false             | true              | 11           | 12    | 0    | 
+      | false             | true              | 10           | >     | 6    | 
+      | false             | true              | 12           | >>    | 4    | 
+      | false             | true              | 12           | last  | 2    | 
       And ud_G ==> the pagination should equal those data.
       | total:Number | current:Number | 
       | 13           | 9              | 
@@ -26,14 +26,14 @@ Feature: test the normal pagination.
       | 3               | 0              | 64               | 5               | 
      When ud_G ==> prepare the normal pagination.
      Then ud_G ==> the page items should equal those data.
-      | isCurrent:Boolean | isEnabled:Boolean | index:Number | text     | type | 
-      | false             | false             | -1           | &lt;     | 5    | 
-      | true              | true              | 0            | 1        | 0    | 
-      | false             | true              | 1            | 2        | 0    | 
-      | false             | true              | 2            | 3        | 0    | 
-      | false             | true              | 1            | &gt;     | 6    | 
-      | false             | true              | 3            | &gt;&gt; | 4    | 
-      | false             | true              | 12           | last     | 2    | 
+      | isCurrent:Boolean | isEnabled:Boolean | index:Number | text | type | 
+      | false             | false             | -1           | <    | 5    | 
+      | true              | true              | 0            | 1    | 0    | 
+      | false             | true              | 1            | 2    | 0    | 
+      | false             | true              | 2            | 3    | 0    | 
+      | false             | true              | 1            | >    | 6    | 
+      | false             | true              | 3            | >>   | 4    | 
+      | false             | true              | 12           | last | 2    | 
       And ud_G ==> the pagination should equal those data.
       | total:Number | current:Number | 
       | 13           | 0              | 
@@ -44,15 +44,15 @@ Feature: test the normal pagination.
       | 3               | 1              | 64               | 5               | 
      When ud_G ==> prepare the normal pagination.
      Then ud_G ==> the page items should equal those data.
-      | isCurrent:Boolean | isEnabled:Boolean | index:Number | text     | type | 
-      | false             | true              | 0            | first    | 1    | 
-      | false             | true              | 0            | &lt;     | 5    | 
-      | false             | true              | 0            | 1        | 0    | 
-      | true              | true              | 1            | 2        | 0    | 
-      | false             | true              | 2            | 3        | 0    | 
-      | false             | true              | 2            | &gt;     | 6    | 
-      | false             | true              | 3            | &gt;&gt; | 4    | 
-      | false             | true              | 12           | last     | 2    | 
+      | isCurrent:Boolean | isEnabled:Boolean | index:Number | text  | type | 
+      | false             | true              | 0            | first | 1    | 
+      | false             | true              | 0            | <     | 5    | 
+      | false             | true              | 0            | 1     | 0    | 
+      | true              | true              | 1            | 2     | 0    | 
+      | false             | true              | 2            | 3     | 0    | 
+      | false             | true              | 2            | >     | 6    | 
+      | false             | true              | 3            | >>    | 4    | 
+      | false             | true              | 12           | last  | 2    | 
       And ud_G ==> the pagination should equal those data.
       | total:Number | current:Number | 
       | 13           | 1              | 
@@ -63,15 +63,15 @@ Feature: test the normal pagination.
       | 3               | 2              | 64               | 5               | 
      When ud_G ==> prepare the normal pagination.
      Then ud_G ==> the page items should equal those data.
-      | isCurrent:Boolean | isEnabled:Boolean | index:Number | text     | type | 
-      | false             | true              | 0            | first    | 1    | 
-      | false             | true              | 1            | &lt;     | 5    | 
-      | false             | true              | 0            | 1        | 0    | 
-      | false             | true              | 1            | 2        | 0    | 
-      | true              | true              | 2            | 3        | 0    | 
-      | false             | true              | 3            | &gt;     | 6    | 
-      | false             | true              | 3            | &gt;&gt; | 4    | 
-      | false             | true              | 12           | last     | 2    | 
+      | isCurrent:Boolean | isEnabled:Boolean | index:Number | text  | type | 
+      | false             | true              | 0            | first | 1    | 
+      | false             | true              | 1            | <     | 5    | 
+      | false             | true              | 0            | 1     | 0    | 
+      | false             | true              | 1            | 2     | 0    | 
+      | true              | true              | 2            | 3     | 0    | 
+      | false             | true              | 3            | >     | 6    | 
+      | false             | true              | 3            | >>    | 4    | 
+      | false             | true              | 12           | last  | 2    | 
       And ud_G ==> the pagination should equal those data.
       | total:Number | current:Number | 
       | 13           | 2              | 
@@ -82,16 +82,16 @@ Feature: test the normal pagination.
       | 3               | 3              | 64               | 5               | 
      When ud_G ==> prepare the normal pagination.
      Then ud_G ==> the page items should equal those data.
-      | isCurrent:Boolean | isEnabled:Boolean | index:Number | text     | type | 
-      | false             | true              | 0            | first    | 1    | 
-      | false             | true              | 0            | &lt;&lt; | 3    | 
-      | false             | true              | 2            | &lt;     | 5    | 
-      | true              | true              | 3            | 4        | 0    | 
-      | false             | true              | 4            | 5        | 0    | 
-      | false             | true              | 5            | 6        | 0    | 
-      | false             | true              | 4            | &gt;     | 6    | 
-      | false             | true              | 6            | &gt;&gt; | 4    | 
-      | false             | true              | 12           | last     | 2    | 
+      | isCurrent:Boolean | isEnabled:Boolean | index:Number | text  | type | 
+      | false             | true              | 0            | first | 1    | 
+      | false             | true              | 0            | <<    | 3    | 
+      | false             | true              | 2            | <     | 5    | 
+      | true              | true              | 3            | 4     | 0    | 
+      | false             | true              | 4            | 5     | 0    | 
+      | false             | true              | 5            | 6     | 0    | 
+      | false             | true              | 4            | >     | 6    | 
+      | false             | true              | 6            | >>    | 4    | 
+      | false             | true              | 12           | last  | 2    | 
       And ud_G ==> the pagination should equal those data.
       | total:Number | current:Number | 
       | 13           | 3              | 
@@ -102,12 +102,12 @@ Feature: test the normal pagination.
       | 3               | 12             | 64               | 5               | 
      When ud_G ==> prepare the normal pagination.
      Then ud_G ==> the page items should equal those data.
-      | isCurrent:Boolean | isEnabled:Boolean | index:Number | text     | type | 
-      | false             | true              | 0            | first    | 1    | 
-      | false             | true              | 9            | &lt;&lt; | 3    | 
-      | false             | true              | 11           | &lt;     | 5    | 
-      | true              | true              | 12           | 13       | 0    | 
-      | false             | false             | 13           | &gt;     | 6    | 
+      | isCurrent:Boolean | isEnabled:Boolean | index:Number | text  | type | 
+      | false             | true              | 0            | first | 1    | 
+      | false             | true              | 9            | <<    | 3    | 
+      | false             | true              | 11           | <     | 5    | 
+      | true              | true              | 12           | 13    | 0    | 
+      | false             | false             | 13           | >     | 6    | 
       And ud_G ==> the pagination should equal those data.
       | total:Number | current:Number | 
       | 13           | 12             | 
@@ -118,16 +118,16 @@ Feature: test the normal pagination.
       | 3               | 11             | 64               | 5               | 
      When ud_G ==> prepare the normal pagination.
      Then ud_G ==> the page items should equal those data.
-      | isCurrent:Boolean | isEnabled:Boolean | index:Number | text     | type | 
-      | false             | true              | 0            | first    | 1    | 
-      | false             | true              | 6            | &lt;&lt; | 3    | 
-      | false             | true              | 10           | &lt;     | 5    | 
-      | false             | true              | 9            | 10       | 0    | 
-      | false             | true              | 10           | 11       | 0    | 
-      | true              | true              | 11           | 12       | 0    | 
-      | false             | true              | 12           | &gt;     | 6    | 
-      | false             | true              | 12           | &gt;&gt; | 4    | 
-      | false             | true              | 12           | last     | 2    | 
+      | isCurrent:Boolean | isEnabled:Boolean | index:Number | text  | type | 
+      | false             | true              | 0            | first | 1    | 
+      | false             | true              | 6            | <<    | 3    | 
+      | false             | true              | 10           | <     | 5    | 
+      | false             | true              | 9            | 10    | 0    | 
+      | false             | true              | 10           | 11    | 0    | 
+      | true              | true              | 11           | 12    | 0    | 
+      | false             | true              | 12           | >     | 6    | 
+      | false             | true              | 12           | >>    | 4    | 
+      | false             | true              | 12           | last  | 2    | 
       And ud_G ==> the pagination should equal those data.
       | total:Number | current:Number | 
       | 13           | 11             | 
