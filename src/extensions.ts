@@ -2,58 +2,48 @@ export { };
 
 declare global {
 
-    interface String {
+  interface String {
+    toEvalGetObject(): Object;
+  }
 
-        toEvalGetObject(): Object;
-
-    }
-
-    interface Array<T> {
-
-        toConvertType(): T[];
-
-    }
+  interface Array<T> {
+    toConvertType(): T[];
+  }
 
 }
 
 Array.prototype.toConvertType = function <T>() {
+  const arr: T[] = [];
 
-    var arr: T[] = [];
+  for (const obj of this) {
+    const newObj = {};
+    for (const p in obj) {
+      const pArr = p.split(':');
+      const newP = pArr[0];
+      const v = obj[p].toString();
 
-    for (let obj of this) {
+      if (pArr.length === 1) {
+        newObj[newP] = v;
+        continue;
+      }
 
-        let newObj = {};
-        for (let p in obj) {
-
-            let pArr = p.split(':');
-            let newP = pArr[0];
-            var v = obj[p].toString();
-
-            if (pArr.length == 1) {
-                newObj[newP] = v;
-                continue;
-            }
-
-            let postfix = pArr[1];
-            if (postfix == "Number") {
-                newObj[newP] = parseFloat(v);
-            }
-            if (postfix == "Date") {
-                newObj[newP] = new Date(v);
-            }
-            if (postfix == "Boolean") {
-                newObj[newP] = (v === 'true');
-            }
-
-        }
-        arr.push(newObj as T);
+      const postfix = pArr[1];
+      if (postfix === 'Number') {
+        newObj[newP] = parseFloat(v);
+      }
+      if (postfix === 'Date') {
+        newObj[newP] = new Date(v);
+      }
+      if (postfix === 'Boolean') {
+        newObj[newP] = (v === 'true');
+      }
     }
-    return arr;
-
-}
+    arr.push(newObj as T);
+  }
+  return arr;
+};
 
 String.prototype.toEvalGetObject = function () {
-
-    return eval(`(${this})`);
-
-}
+  // tslint:disable-next-line:no-eval
+  return eval(`(${this})`);
+};

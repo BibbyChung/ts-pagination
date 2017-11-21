@@ -1,108 +1,124 @@
-"use strict";
-const paginationBase_1 = require('./core/paginationBase');
-const PagerItem_1 = require('./core/PagerItem');
-class SimplePagination extends paginationBase_1.PaginationBase {
-    constructor(itemSize, current, dataCount, pageSize) {
-        super(itemSize, current, dataCount, pageSize);
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+(function (factory) {
+    if (typeof module === 'object' && typeof module.exports === 'object') {
+        var v = factory(require, exports); if (v !== undefined) module.exports = v;
     }
-    first() {
-        if (!this.setting.isShowFirstLastItem)
-            return;
-        if (this.current == 0)
-            return;
-        let pi = this.getDefaultPagerItem();
-        pi.index = 0;
-        pi.text = this.setting.firstText;
-        pi.type = PagerItem_1.PagerEnum.First;
-        this.items.push(pi);
+    else if (typeof define === 'function' && define.amd) {
+        define(["require", "exports", './core/paginationBase', './core/PagerItem'], factory);
     }
-    preGroup() {
-        if (!this.setting.isShowPrevNextGroupItem)
-            return;
-        let p = this.getCurrentPagerStatus();
-        if (p <= 0)
-            return;
-        let pi = this.getDefaultPagerItem();
-        pi.index = (p - 1) * this.itemSize;
-        pi.text = this.setting.preGroupText;
-        pi.type = PagerItem_1.PagerEnum.PreGroup;
-        this.items.push(pi);
-    }
-    preItem() {
-        if (!this.setting.isShowPrevNextItem)
-            return;
-        let pi = this.getDefaultPagerItem();
-        pi.index = this.current - 1;
-        pi.text = this.setting.PreText;
-        pi.type = PagerItem_1.PagerEnum.Previous;
-        this.items.push(pi);
-        if (this.current == 0) {
-            pi.isEnabled = false;
+})(function (require, exports) {
+    "use strict";
+    var paginationBase_1 = require('./core/paginationBase');
+    var PagerItem_1 = require('./core/PagerItem');
+    var SimplePagination = (function (_super) {
+        __extends(SimplePagination, _super);
+        function SimplePagination(itemSize, current, dataCount, pageSize) {
+            _super.call(this, itemSize, current, dataCount, pageSize);
         }
-    }
-    processItems() {
-        let p = this.getCurrentPagerStatus();
-        let count = Math.min(this.itemSize, this.total - (p * this.itemSize));
-        for (let i = 1; i <= count; i++) {
-            let pi = this.getDefaultPagerItem();
-            pi.index = (p * this.itemSize) + i - 1;
-            pi.text = ((p * this.itemSize) + i).toString();
-            pi.type = PagerItem_1.PagerEnum.Number;
-            pi.isCurrent = pi.index == this.current;
+        SimplePagination.prototype.first = function () {
+            if (!this.setting.isShowFirstLastItem)
+                return;
+            if (this.current === 0)
+                return;
+            var pi = this.getDefaultPagerItem();
+            pi.index = 0;
+            pi.text = this.setting.firstText;
+            pi.type = PagerItem_1.PagerEnum.First;
             this.items.push(pi);
-        }
-    }
-    nextItem() {
-        if (!this.setting.isShowPrevNextItem)
-            return;
-        let pi = this.getDefaultPagerItem();
-        pi.index = this.current + 1;
-        pi.text = this.setting.nextText;
-        pi.type = PagerItem_1.PagerEnum.Next;
-        this.items.push(pi);
-        if (this.current + 1 == this.total) {
-            pi.isEnabled = false;
-        }
-    }
-    nextGroup() {
-        if (!this.setting.isShowPrevNextGroupItem)
-            return;
-        let p = this.getCurrentPagerStatus();
-        if ((p + 1) * this.itemSize >= this.total)
-            return;
-        let pi = this.getDefaultPagerItem();
-        pi.index = (p + 1) * this.itemSize;
-        pi.text = this.setting.nextGroupText;
-        pi.type = PagerItem_1.PagerEnum.NextGroup;
-        this.items.push(pi);
-    }
-    last() {
-        if (!this.setting.isShowFirstLastItem)
-            return;
-        if (this.current + 1 >= this.total)
-            return;
-        let pi = this.getDefaultPagerItem();
-        pi.index = this.total - 1;
-        pi.text = this.setting.lastText;
-        pi.type = PagerItem_1.PagerEnum.Last;
-        this.items.push(pi);
-    }
-    getCurrentPagerStatus() {
-        let p = Math.floor((this.current + 1) / this.itemSize);
-        if (((this.current + 1) % this.itemSize) == 0)
-            p--;
-        return p;
-    }
-    build() {
-        this.first();
-        this.preGroup();
-        this.preItem();
-        this.processItems();
-        this.nextItem();
-        this.nextGroup();
-        this.last();
-    }
-}
-exports.SimplePagination = SimplePagination;
+        };
+        SimplePagination.prototype.preGroup = function () {
+            if (!this.setting.isShowPrevNextGroupItem)
+                return;
+            var p = this.getCurrentPagerStatus();
+            if (p <= 0)
+                return;
+            var pi = this.getDefaultPagerItem();
+            pi.index = (p - 1) * this.itemSize;
+            pi.text = this.setting.preGroupText;
+            pi.type = PagerItem_1.PagerEnum.PreGroup;
+            this.items.push(pi);
+        };
+        SimplePagination.prototype.preItem = function () {
+            if (!this.setting.isShowPrevNextItem)
+                return;
+            var pi = this.getDefaultPagerItem();
+            pi.index = this.current - 1;
+            pi.text = this.setting.PreText;
+            pi.type = PagerItem_1.PagerEnum.Previous;
+            this.items.push(pi);
+            if (this.current === 0) {
+                pi.isEnabled = false;
+            }
+        };
+        SimplePagination.prototype.processItems = function () {
+            var p = this.getCurrentPagerStatus();
+            var count = Math.min(this.itemSize, this.total - (p * this.itemSize));
+            for (var i = 1; i <= count; i += 1) {
+                var pi = this.getDefaultPagerItem();
+                pi.index = (p * this.itemSize) + i - 1;
+                pi.text = ((p * this.itemSize) + i).toString();
+                pi.type = PagerItem_1.PagerEnum.Number;
+                pi.isCurrent = pi.index === this.current;
+                this.items.push(pi);
+            }
+        };
+        SimplePagination.prototype.nextItem = function () {
+            if (!this.setting.isShowPrevNextItem)
+                return;
+            var pi = this.getDefaultPagerItem();
+            pi.index = this.current + 1;
+            pi.text = this.setting.nextText;
+            pi.type = PagerItem_1.PagerEnum.Next;
+            this.items.push(pi);
+            if (this.current + 1 === this.total) {
+                pi.isEnabled = false;
+            }
+        };
+        SimplePagination.prototype.nextGroup = function () {
+            if (!this.setting.isShowPrevNextGroupItem)
+                return;
+            var p = this.getCurrentPagerStatus();
+            if ((p + 1) * this.itemSize >= this.total)
+                return;
+            var pi = this.getDefaultPagerItem();
+            pi.index = (p + 1) * this.itemSize;
+            pi.text = this.setting.nextGroupText;
+            pi.type = PagerItem_1.PagerEnum.NextGroup;
+            this.items.push(pi);
+        };
+        SimplePagination.prototype.last = function () {
+            if (!this.setting.isShowFirstLastItem)
+                return;
+            if (this.current + 1 >= this.total)
+                return;
+            var pi = this.getDefaultPagerItem();
+            pi.index = this.total - 1;
+            pi.text = this.setting.lastText;
+            pi.type = PagerItem_1.PagerEnum.Last;
+            this.items.push(pi);
+        };
+        SimplePagination.prototype.getCurrentPagerStatus = function () {
+            var p = Math.floor((this.current + 1) / this.itemSize);
+            if (((this.current + 1) % this.itemSize) === 0)
+                p -= 1;
+            return p;
+        };
+        SimplePagination.prototype.build = function () {
+            this.first();
+            this.preGroup();
+            this.preItem();
+            this.processItems();
+            this.nextItem();
+            this.nextGroup();
+            this.last();
+        };
+        return SimplePagination;
+    }(paginationBase_1.PaginationBase));
+    exports.SimplePagination = SimplePagination;
+});
 
 //# sourceMappingURL=simplePagination.js.map
