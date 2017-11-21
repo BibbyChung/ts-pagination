@@ -9,11 +9,8 @@
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var PaginationSetting = /** @class */ (function () {
-        function PaginationSetting() {
-        }
-        return PaginationSetting;
-    }());
+    class PaginationSetting {
+    }
     exports.PaginationSetting = PaginationSetting;
 });
 

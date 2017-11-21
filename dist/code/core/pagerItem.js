@@ -9,11 +9,8 @@
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var PagerItem = /** @class */ (function () {
-        function PagerItem() {
-        }
-        return PagerItem;
-    }());
+    class PagerItem {
+    }
     exports.PagerItem = PagerItem;
     var PagerEnum;
     (function (PagerEnum) {

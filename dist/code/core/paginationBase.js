@@ -9,10 +9,10 @@
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var pagerItem_1 = require("./pagerItem");
-    var paginationSetting_1 = require("./paginationSetting");
-    var PaginationBase = /** @class */ (function () {
-        function PaginationBase(itemSize, current, dataCount, pageSize) {
+    const pagerItem_1 = require("./pagerItem");
+    const paginationSetting_1 = require("./paginationSetting");
+    class PaginationBase {
+        constructor(itemSize, current, dataCount, pageSize) {
             this.itemSize = itemSize;
             this.current = current;
             this.dataCount = dataCount;
@@ -25,11 +25,11 @@
             this.dataCount = parseInt(this.dataCount.toString(), 10);
             this.pageSize = parseInt(this.pageSize.toString(), 10);
         }
-        PaginationBase.prototype.setTotal = function () {
+        setTotal() {
             this.total = Math.ceil(this.dataCount / this.pageSize);
-        };
-        PaginationBase.prototype.setDefaultSetting = function () {
-            var ps = new paginationSetting_1.PaginationSetting();
+        }
+        setDefaultSetting() {
+            const ps = new paginationSetting_1.PaginationSetting();
             ps.firstText = 'first';
             ps.lastText = 'last';
             ps.preGroupText = '<<';
@@ -40,15 +40,14 @@
             ps.isShowPrevNextGroupItem = true;
             ps.isShowPrevNextItem = true;
             this.setting = ps;
-        };
-        PaginationBase.prototype.getDefaultPagerItem = function () {
-            var pi = new pagerItem_1.PagerItem();
+        }
+        getDefaultPagerItem() {
+            const pi = new pagerItem_1.PagerItem();
             pi.isCurrent = false;
             pi.isEnabled = true;
             return pi;
-        };
-        return PaginationBase;
-    }());
+        }
+    }
     exports.PaginationBase = PaginationBase;
 });
 

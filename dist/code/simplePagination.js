@@ -1,13 +1,3 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 (function (factory) {
     if (typeof module === "object" && typeof module.exports === "object") {
         var v = factory(require, exports);
@@ -19,40 +9,39 @@ var __extends = (this && this.__extends) || (function () {
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var pagerItem_1 = require("./core/pagerItem");
-    var paginationBase_1 = require("./core/paginationBase");
-    var SimplePagination = /** @class */ (function (_super) {
-        __extends(SimplePagination, _super);
-        function SimplePagination(itemSize, current, dataCount, pageSize) {
-            return _super.call(this, itemSize, current, dataCount, pageSize) || this;
+    const pagerItem_1 = require("./core/pagerItem");
+    const paginationBase_1 = require("./core/paginationBase");
+    class SimplePagination extends paginationBase_1.PaginationBase {
+        constructor(itemSize, current, dataCount, pageSize) {
+            super(itemSize, current, dataCount, pageSize);
         }
-        SimplePagination.prototype.first = function () {
+        first() {
             if (!this.setting.isShowFirstLastItem)
                 return;
             if (this.current === 0)
                 return;
-            var pi = this.getDefaultPagerItem();
+            const pi = this.getDefaultPagerItem();
             pi.index = 0;
             pi.text = this.setting.firstText;
             pi.type = pagerItem_1.PagerEnum.First;
             this.items.push(pi);
-        };
-        SimplePagination.prototype.preGroup = function () {
+        }
+        preGroup() {
             if (!this.setting.isShowPrevNextGroupItem)
                 return;
-            var p = this.getCurrentPagerStatus();
+            const p = this.getCurrentPagerStatus();
             if (p <= 0)
                 return;
-            var pi = this.getDefaultPagerItem();
+            const pi = this.getDefaultPagerItem();
             pi.index = (p - 1) * this.itemSize;
             pi.text = this.setting.preGroupText;
             pi.type = pagerItem_1.PagerEnum.PreGroup;
             this.items.push(pi);
-        };
-        SimplePagination.prototype.preItem = function () {
+        }
+        preItem() {
             if (!this.setting.isShowPrevNextItem)
                 return;
-            var pi = this.getDefaultPagerItem();
+            const pi = this.getDefaultPagerItem();
             pi.index = this.current - 1;
             pi.text = this.setting.PreText;
             pi.type = pagerItem_1.PagerEnum.Previous;
@@ -60,23 +49,23 @@ var __extends = (this && this.__extends) || (function () {
             if (this.current === 0) {
                 pi.isEnabled = false;
             }
-        };
-        SimplePagination.prototype.processItems = function () {
-            var p = this.getCurrentPagerStatus();
-            var count = Math.min(this.itemSize, this.total - (p * this.itemSize));
-            for (var i = 1; i <= count; i += 1) {
-                var pi = this.getDefaultPagerItem();
+        }
+        processItems() {
+            const p = this.getCurrentPagerStatus();
+            const count = Math.min(this.itemSize, this.total - (p * this.itemSize));
+            for (let i = 1; i <= count; i += 1) {
+                const pi = this.getDefaultPagerItem();
                 pi.index = (p * this.itemSize) + i - 1;
                 pi.text = ((p * this.itemSize) + i).toString();
                 pi.type = pagerItem_1.PagerEnum.Number;
                 pi.isCurrent = pi.index === this.current;
                 this.items.push(pi);
             }
-        };
-        SimplePagination.prototype.nextItem = function () {
+        }
+        nextItem() {
             if (!this.setting.isShowPrevNextItem)
                 return;
-            var pi = this.getDefaultPagerItem();
+            const pi = this.getDefaultPagerItem();
             pi.index = this.current + 1;
             pi.text = this.setting.nextText;
             pi.type = pagerItem_1.PagerEnum.Next;
@@ -84,37 +73,37 @@ var __extends = (this && this.__extends) || (function () {
             if (this.current + 1 === this.total) {
                 pi.isEnabled = false;
             }
-        };
-        SimplePagination.prototype.nextGroup = function () {
+        }
+        nextGroup() {
             if (!this.setting.isShowPrevNextGroupItem)
                 return;
-            var p = this.getCurrentPagerStatus();
+            const p = this.getCurrentPagerStatus();
             if ((p + 1) * this.itemSize >= this.total)
                 return;
-            var pi = this.getDefaultPagerItem();
+            const pi = this.getDefaultPagerItem();
             pi.index = (p + 1) * this.itemSize;
             pi.text = this.setting.nextGroupText;
             pi.type = pagerItem_1.PagerEnum.NextGroup;
             this.items.push(pi);
-        };
-        SimplePagination.prototype.last = function () {
+        }
+        last() {
             if (!this.setting.isShowFirstLastItem)
                 return;
             if (this.current + 1 >= this.total)
                 return;
-            var pi = this.getDefaultPagerItem();
+            const pi = this.getDefaultPagerItem();
             pi.index = this.total - 1;
             pi.text = this.setting.lastText;
             pi.type = pagerItem_1.PagerEnum.Last;
             this.items.push(pi);
-        };
-        SimplePagination.prototype.getCurrentPagerStatus = function () {
-            var p = Math.floor((this.current + 1) / this.itemSize);
+        }
+        getCurrentPagerStatus() {
+            let p = Math.floor((this.current + 1) / this.itemSize);
             if (((this.current + 1) % this.itemSize) === 0)
                 p -= 1;
             return p;
-        };
-        SimplePagination.prototype.build = function () {
+        }
+        build() {
             this.first();
             this.preGroup();
             this.preItem();
@@ -122,9 +111,8 @@ var __extends = (this && this.__extends) || (function () {
             this.nextItem();
             this.nextGroup();
             this.last();
-        };
-        return SimplePagination;
-    }(paginationBase_1.PaginationBase));
+        }
+    }
     exports.SimplePagination = SimplePagination;
 });
 
