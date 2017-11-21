@@ -32,6 +32,22 @@ let tsCompiler = (
     .pipe(gulp.dest(targetPath));
 };
 
+let tsdCompiler = function (
+  pathArr,
+  tsconfigPath,
+  targetPath
+) {
+
+  let tscP = ts.createProject(tsconfigPath, {
+    "isolatedModules": false,
+  });
+
+  return gulp.src(pathArr)
+    .pipe(tscP())
+    .dts
+    .pipe(gulp.dest(targetPath));
+};
+
 let getCopyFilesPipe = (sourcePatten, targetPath) => {
   return gulp.src(sourcePatten)
     .pipe(gulp.dest(targetPath));
@@ -185,6 +201,31 @@ gulp.task('ts_compile_dist', () => {
   return m;
 });
 
+gulp.task('tsd_compile_dist', () => {
+  let m = merge();
+
+  let code = tsdCompiler(
+    [
+      "./src/code/**/*.ts",
+    ],
+    "tsconfig.json",
+    "./dist/code"
+  );
+  m.add(code);
+
+  let main = tsdCompiler(
+    [
+      "./src/main.ts",
+    ],
+    "tsconfig.json",
+    "./dist/"
+  );
+  m.add(main);
+
+
+  return m;
+});
+
 gulp.task("run_cucumber", shell.task([
   'cucumber.js test/**/*.feature --format progress'
   //'cucumber.js --format pretty'
@@ -205,6 +246,7 @@ gulp.task('default', (cb) => {
     [
       "ts_compile_test",
       "ts_compile_dist",
+      "tsd_compile_dist",
       "copy_feature_to_test",
     ],
     [

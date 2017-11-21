@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Pagination for Node.js and JavaScript",
   "main": "./dist/main.js",
+  "types": "./dist/main.d.ts",
   "directories": {
     "test": "test"
   },
