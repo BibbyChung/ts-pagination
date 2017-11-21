@@ -1,15 +1,17 @@
 (function (factory) {
-    if (typeof module === 'object' && typeof module.exports === 'object') {
-        var v = factory(require, exports); if (v !== undefined) module.exports = v;
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
     }
-    else if (typeof define === 'function' && define.amd) {
-        define(["require", "exports", './pagerItem', './paginationSetting'], factory);
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports", "./pagerItem", "./paginationSetting"], factory);
     }
 })(function (require, exports) {
     "use strict";
-    var pagerItem_1 = require('./pagerItem');
-    var paginationSetting_1 = require('./paginationSetting');
-    var PaginationBase = (function () {
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var pagerItem_1 = require("./pagerItem");
+    var paginationSetting_1 = require("./paginationSetting");
+    var PaginationBase = /** @class */ (function () {
         function PaginationBase(itemSize, current, dataCount, pageSize) {
             this.itemSize = itemSize;
             this.current = current;

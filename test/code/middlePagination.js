@@ -1,24 +1,32 @@
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 (function (factory) {
-    if (typeof module === 'object' && typeof module.exports === 'object') {
-        var v = factory(require, exports); if (v !== undefined) module.exports = v;
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
     }
-    else if (typeof define === 'function' && define.amd) {
-        define(["require", "exports", './core/pagerItem', './core/paginationBase'], factory);
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports", "./core/pagerItem", "./core/paginationBase"], factory);
     }
 })(function (require, exports) {
     "use strict";
-    var pagerItem_1 = require('./core/pagerItem');
-    var paginationBase_1 = require('./core/paginationBase');
-    var MiddlePagination = (function (_super) {
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var pagerItem_1 = require("./core/pagerItem");
+    var paginationBase_1 = require("./core/paginationBase");
+    var MiddlePagination = /** @class */ (function (_super) {
         __extends(MiddlePagination, _super);
         function MiddlePagination(itemSize, current, dataCount, pageSize) {
-            _super.call(this, itemSize, current, dataCount, pageSize);
-            this.range = 4;
+            var _this = _super.call(this, itemSize, current, dataCount, pageSize) || this;
+            _this.range = 4;
+            return _this;
         }
         MiddlePagination.prototype.processItems = function () {
             var rightNumber = this.total - (this.current + 1);

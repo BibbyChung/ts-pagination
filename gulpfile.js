@@ -13,228 +13,204 @@ let path = require('path');
 
 //=================================== Method ===================================
 
-let tsCompiler = function (
-    pathArr,
-    tsconfigPath,
-    sroucemapPostfix,
-    targetPath,
-    isUglify) {
+let tsCompiler = (
+  pathArr,
+  tsconfigPath,
+  sourceRoot,
+  targetPath,
+  isUglify) => {
 
-    return gulp.src(pathArr)
-        .pipe(sourcemaps.init())
-        .pipe(ts(ts.createProject(tsconfigPath)))
-        .js
-        //.pipe(uglify())
-        .pipe(sourcemaps.write("./", {
-            includeContent: false,
-            sourceRoot: function (file) {
-                let arr = file.relative.split("/");
-                let prefix = "";
-                for (let i = 0; i < arr.length; i++) {
-                    prefix += "../";
-                }
-                return prefix + sroucemapPostfix;
-            }
-        }))
-        .pipe(gulp.dest(targetPath));
+  return gulp.src(pathArr)
+    .pipe(sourcemaps.init())
+    .pipe(ts.createProject(tsconfigPath)())
+    .js
+    //.pipe(uglify())
+    .pipe(sourcemaps.write("./", {
+      includeContent: false,
+      sourceRoot: sourceRoot,
+    }))
+    .pipe(gulp.dest(targetPath));
 };
 
 let getCopyFilesPipe = (sourcePatten, targetPath) => {
-
-    return gulp.src(sourcePatten)
-        .pipe(gulp.dest(targetPath));
-
+  return gulp.src(sourcePatten)
+    .pipe(gulp.dest(targetPath));
 };
 
 let addTagForFeatureFiles = () => {
+  // creating a stream through which each file will pass
+  let stream = through.obj(function (file, enc, done) {
+    if (file.isBuffer()) {
 
-    // creating a stream through which each file will pass
-    let stream = through.obj(function (file, enc, done) {
-        if (file.isBuffer()) {
-
-            let b = getNewBuffer(file.contents);
-            file.contents = b;
-
-        }
-
-        // make sure the file goes through the next gulp plugin
-        this.push(file);
-
-        // tell the stream engine that we are done with this file
-        done();
-    });
-
-    let getNewBuffer = (buffer) => {
-
-        let str = buffer.toString();
-        let arr = str.split("\n");
-
-        if (arr.length == 0)
-            return buffer;
-
-        let id = getSpecialLetters(4);
-        //let id = generateUIDNotMoreThan1million();
-        let newArr = [];
-
-        if (arr[0].indexOf("@") != 0) {
-            newArr.push(`@${id}`);
-        } else {
-            id = arr[0].replace("@", "")
-        }
-
-        for (let item of arr) {
-
-            let s = item;
-            s = replaceSpecialWording(s, "Given", id);
-            s = replaceSpecialWording(s, "When", id);
-            s = replaceSpecialWording(s, "Then", id);
-            s = replaceSpecialWording(s, "And", id);
-            s = replaceSpecialWording(s, "But", id);
-
-            newArr.push(s);
-
-        }
-
-        let newStr = newArr.join("\n");
-        return new Buffer(newStr);
+      let b = getNewBuffer(file.contents);
+      file.contents = b;
 
     }
 
-    let replaceSpecialWording = (str, replaceWording, id) => {
-        if (str.indexOf(replaceWording) == -1)
-            return str;
+    // make sure the file goes through the next gulp plugin
+    this.push(file);
 
-        if (str.indexOf(" ==> ") != -1)
-            return str;
+    // tell the stream engine that we are done with this file
+    done();
+  });
 
-        return str.replace(`${replaceWording} `, `${replaceWording} ${id} ==> `);
+  let getNewBuffer = (buffer) => {
+    let str = buffer.toString();
+    let arr = str.split("\n");
+
+    if (arr.length == 0)
+      return buffer;
+
+    let id = getSpecialLetters(4);
+    //let id = generateUIDNotMoreThan1million();
+    let newArr = [];
+
+    if (arr[0].indexOf("@") != 0) {
+      newArr.push(`@${id}`);
+    } else {
+      id = arr[0].replace("@", "")
     }
 
-    let getSpecialLetters = (len) => {
-        let chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_',
-            out = '';
+    for (let item of arr) {
+      let s = item;
+      s = replaceSpecialWording(s, "Given", id);
+      s = replaceSpecialWording(s, "When", id);
+      s = replaceSpecialWording(s, "Then", id);
+      s = replaceSpecialWording(s, "And", id);
+      s = replaceSpecialWording(s, "But", id);
 
-        for (let i = 0, clen = chars.length; i < len; i++) {
-            out += chars.substr(0 | Math.random() * clen, 1);
-        }
-
-        return out;
+      newArr.push(s);
     }
 
-    let generateUIDNotMoreThan1million = function () {
-        return ("0000" + (Math.random() * Math.pow(36, 4) << 0).toString(36)).slice(-4)
+    let newStr = newArr.join("\n");
+    return new Buffer(newStr);
+  }
+
+  let replaceSpecialWording = (str, replaceWording, id) => {
+    if (str.indexOf(replaceWording) == -1)
+      return str;
+
+    if (str.indexOf(" ==> ") != -1)
+      return str;
+
+    return str.replace(`${replaceWording} `, `${replaceWording} ${id} ==> `);
+  }
+
+  let getSpecialLetters = (len) => {
+    let chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_',
+      out = '';
+
+    for (let i = 0, clen = chars.length; i < len; i++) {
+      out += chars.substr(0 | Math.random() * clen, 1);
     }
 
-    return stream;
+    return out;
+  }
 
+  let generateUIDNotMoreThan1million = function () {
+    return ("0000" + (Math.random() * Math.pow(36, 4) << 0).toString(36)).slice(-4)
+  }
+
+  return stream;
 };
 
 //=================================== Tasks ===================================
 
 gulp.task("clean", (cb) => {
-
-    rimraf("./test", () => {
-        rimraf("./dist", cb);
-    });
-
+  rimraf("./test", () => {
+    rimraf("./dist", cb);
+  });
 });
 
 gulp.task("addTagForFeatureFiles", () => {
-
-    return gulp.src('./src/**/*.feature')
-        .pipe(addTagForFeatureFiles())
-        .pipe(gulp.dest('./src/'));
-
+  return gulp.src('./src/**/*.feature')
+    .pipe(addTagForFeatureFiles())
+    .pipe(gulp.dest('./src/'));
 })
 
 gulp.task("copy_feature_to_test", () => {
+  let m = merge();
 
-    let m = merge();
+  let test = gulp.src([
+    "./src/**/*.feature",
+  ]).pipe(gulp.dest("./test/"));
+  m.add(test);
 
-    let test = gulp.src([
-        "./src/**/*.feature",
-    ]).pipe(gulp.dest("./test/"));
-    m.add(test);
-
-    return m;
-
+  return m;
 });
 
 gulp.task('ts_compile_test', () => {
 
-    let m = merge();
+  let m = merge();
 
-    let test = tsCompiler(
-        [
-            "./src/**/*.ts",
-        ],
-        "tsconfig_test.json",
-        "src",
-        "./test",
-        false
-    );
-    m.add(test);
+  let test = tsCompiler(
+    [
+      "./src/**/*.ts",
+    ],
+    "tsconfig_test.json",
+    "../src",
+    "./test",
+    false
+  );
+  m.add(test);
 
-    return m;
-
+  return m;
 });
 
 gulp.task('ts_compile_dist', () => {
+  let m = merge();
 
-    let m = merge();
+  let code = tsCompiler(
+    [
+      "./src/code/**/*.ts",
+    ],
+    "tsconfig.json",
+    "../src/code",
+    "./dist/code",
+    false
+  );
+  m.add(code);
 
-    let code = tsCompiler(
-        [
-            "./src/code/**/*.ts",
-        ],
-        "tsconfig.json",
-        "src/code",
-        "./dist/code",
-        false
-    );
-    m.add(code);
+  let main = tsCompiler(
+    [
+      "./src/main.ts",
+    ],
+    "tsconfig.json",
+    "../src",
+    "./dist/",
+    false
+  );
+  m.add(main);
 
-    let main = tsCompiler(
-        [
-            "./src/main.ts",
-        ],
-        "tsconfig.json",
-        "src",
-        "./dist/",
-        false
-    );
-    m.add(main);
-
-    return m;
-
+  return m;
 });
 
 gulp.task("run_cucumber", shell.task([
-    'cucumber.js test/**/*.feature --format progress'
-    //'cucumber.js --format pretty'
+  'cucumber.js test/**/*.feature --format progress'
+  //'cucumber.js --format pretty'
 ]));
 
 gulp.task("create_ts_definitions", shell.task([
-    'tsc --declaration ./src/main.ts'
-    //'cucumber.js --format pretty'
+  'tsc --declaration ./src/main.ts'
+  //'cucumber.js --format pretty'
 ]));
 
 //----------------------------------------------------------------------
 
 
 gulp.task('default', (cb) => {
-    runSequence(
-        "clean",
-        "addTagForFeatureFiles",
-        [
-            "ts_compile_test",
-            "ts_compile_dist",
-            "copy_feature_to_test",
-        ],
-        [
-            "run_cucumber",
-        ],
-        cb
-    );
+  runSequence(
+    "clean",
+    "addTagForFeatureFiles",
+    [
+      "ts_compile_test",
+      "ts_compile_dist",
+      "copy_feature_to_test",
+    ],
+    [
+      "run_cucumber",
+    ],
+    cb
+  );
 });
 

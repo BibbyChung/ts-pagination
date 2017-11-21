@@ -1,15 +1,16 @@
 (function (factory) {
-    if (typeof module === 'object' && typeof module.exports === 'object') {
-        var v = factory(require, exports); if (v !== undefined) module.exports = v;
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
     }
-    else if (typeof define === 'function' && define.amd) {
-        define(["require", "exports", 'assert', './../extensions', '../code/simplePagination'], factory);
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports", "assert", "./../extensions", "../code/simplePagination"], factory);
     }
 })(function (require, exports) {
     "use strict";
-    var assert = require('assert');
-    require('./../extensions');
-    var simplePagination_1 = require('../code/simplePagination');
+    var assert = require("assert");
+    require("./../extensions");
+    var simplePagination_1 = require("../code/simplePagination");
     var prepareToRun = function (_self, tag) {
         _self.Before({ tags: [tag] }, function (scenario) {
         });
