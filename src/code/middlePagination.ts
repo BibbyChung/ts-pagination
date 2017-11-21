@@ -1,6 +1,7 @@
 import { PagerEnum, PagerItem } from './core/pagerItem';
 import { PaginationBase } from './core/paginationBase';
 
+
 export class MiddlePagination extends PaginationBase {
 
   range: number = 4;

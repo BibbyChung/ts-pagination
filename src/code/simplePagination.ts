@@ -1,5 +1,5 @@
+import { PagerEnum } from './core/pagerItem';
 import { PaginationBase } from './core/paginationBase';
-import { PagerItem, PagerEnum } from './core/PagerItem';
 
 export class SimplePagination extends PaginationBase {
 
@@ -126,5 +126,5 @@ export class SimplePagination extends PaginationBase {
     this.nextGroup();
     this.last();
   }
-  
+
 }

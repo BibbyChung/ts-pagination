@@ -14,13 +14,13 @@ var __extends = (this && this.__extends) || (function () {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "./core/paginationBase", "./core/PagerItem"], factory);
+        define(["require", "exports", "./core/pagerItem", "./core/paginationBase"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    var pagerItem_1 = require("./core/pagerItem");
     var paginationBase_1 = require("./core/paginationBase");
-    var PagerItem_1 = require("./core/PagerItem");
     var SimplePagination = /** @class */ (function (_super) {
         __extends(SimplePagination, _super);
         function SimplePagination(itemSize, current, dataCount, pageSize) {
@@ -34,7 +34,7 @@ var __extends = (this && this.__extends) || (function () {
             var pi = this.getDefaultPagerItem();
             pi.index = 0;
             pi.text = this.setting.firstText;
-            pi.type = PagerItem_1.PagerEnum.First;
+            pi.type = pagerItem_1.PagerEnum.First;
             this.items.push(pi);
         };
         SimplePagination.prototype.preGroup = function () {
@@ -46,7 +46,7 @@ var __extends = (this && this.__extends) || (function () {
             var pi = this.getDefaultPagerItem();
             pi.index = (p - 1) * this.itemSize;
             pi.text = this.setting.preGroupText;
-            pi.type = PagerItem_1.PagerEnum.PreGroup;
+            pi.type = pagerItem_1.PagerEnum.PreGroup;
             this.items.push(pi);
         };
         SimplePagination.prototype.preItem = function () {
@@ -55,7 +55,7 @@ var __extends = (this && this.__extends) || (function () {
             var pi = this.getDefaultPagerItem();
             pi.index = this.current - 1;
             pi.text = this.setting.PreText;
-            pi.type = PagerItem_1.PagerEnum.Previous;
+            pi.type = pagerItem_1.PagerEnum.Previous;
             this.items.push(pi);
             if (this.current === 0) {
                 pi.isEnabled = false;
@@ -68,7 +68,7 @@ var __extends = (this && this.__extends) || (function () {
                 var pi = this.getDefaultPagerItem();
                 pi.index = (p * this.itemSize) + i - 1;
                 pi.text = ((p * this.itemSize) + i).toString();
-                pi.type = PagerItem_1.PagerEnum.Number;
+                pi.type = pagerItem_1.PagerEnum.Number;
                 pi.isCurrent = pi.index === this.current;
                 this.items.push(pi);
             }
@@ -79,7 +79,7 @@ var __extends = (this && this.__extends) || (function () {
             var pi = this.getDefaultPagerItem();
             pi.index = this.current + 1;
             pi.text = this.setting.nextText;
-            pi.type = PagerItem_1.PagerEnum.Next;
+            pi.type = pagerItem_1.PagerEnum.Next;
             this.items.push(pi);
             if (this.current + 1 === this.total) {
                 pi.isEnabled = false;
@@ -94,7 +94,7 @@ var __extends = (this && this.__extends) || (function () {
             var pi = this.getDefaultPagerItem();
             pi.index = (p + 1) * this.itemSize;
             pi.text = this.setting.nextGroupText;
-            pi.type = PagerItem_1.PagerEnum.NextGroup;
+            pi.type = pagerItem_1.PagerEnum.NextGroup;
             this.items.push(pi);
         };
         SimplePagination.prototype.last = function () {
@@ -105,7 +105,7 @@ var __extends = (this && this.__extends) || (function () {
             var pi = this.getDefaultPagerItem();
             pi.index = this.total - 1;
             pi.text = this.setting.lastText;
-            pi.type = PagerItem_1.PagerEnum.Last;
+            pi.type = pagerItem_1.PagerEnum.Last;
             this.items.push(pi);
         };
         SimplePagination.prototype.getCurrentPagerStatus = function () {
