@@ -1,17 +1,10 @@
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var PaginationSetting = /** @class */ (function () {
+    function PaginationSetting() {
     }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports"], factory);
-    }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    class PaginationSetting {
-    }
-    exports.PaginationSetting = PaginationSetting;
-});
+    return PaginationSetting;
+}());
+exports.PaginationSetting = PaginationSetting;
 
 //# sourceMappingURL=paginationSetting.js.map
