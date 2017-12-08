@@ -1,6 +1,6 @@
 {
   "name": "ts-pagination",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Pagination for Node.js and JavaScript",
   "main": "./dist/main.js",
   "types": "./dist/main.d.ts",
