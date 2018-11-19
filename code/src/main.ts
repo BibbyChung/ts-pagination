@@ -12,7 +12,7 @@ import { SimplePagination } from './code/simplePagination';
 // console.log("total", simpleP.total);
 // console.log("current", simpleP.current);
 
-//import { MiddlePagination } from './code/middlePagination';
+// import { MiddlePagination } from './code/middlePagination';
 
 // let middle = new MiddlePagination(9, 10, 1000, 10);
 // middle.build();
@@ -25,5 +25,5 @@ export {
     PagerEnum,
     PaginationBase,
     SimplePagination,
-    PaginationSetting
+    PaginationSetting,
 };
