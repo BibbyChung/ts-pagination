@@ -247,7 +247,9 @@ gulp.task('default', gulp.series(
     'copy_feature_to_test',
   ),
   'run_cucumber',
-));
+), () => {
+  console.log('done');
+});
 
 
 // gulp.task('default', (cb) => {
