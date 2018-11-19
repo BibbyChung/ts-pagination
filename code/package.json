@@ -5,7 +5,8 @@
   "main": "./dist/main.js",
   "types": "./dist/main.d.ts",
   "scripts": {
-    "test": "cucumber.js test/**/*.feature --format pretty"
+    "test": "cucumber.js test/**/*.feature --format pretty",
+    "build_test": "./node_modules/gulp/bin/gulp.js"
   },
   "homepage": "https://github.com/BibbyChung/ts-pagination#readme",
   "bugs": "https://github.com/BibbyChung/ngx-config-form/issues",
