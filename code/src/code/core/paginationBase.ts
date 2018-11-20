@@ -7,20 +7,24 @@ export abstract class PaginationBase {
   setting: PaginationSetting;
   total: number;
 
-  constructor(public itemSize: number, public current: number, public dataCount: number, public pageSize: number) {
+  constructor(
+    public pagerSize: number,
+    public currentIndex: number,
+    public dataTotal: number,
+    public dataSize: number,
+  ) {
     this.setDefaultSetting();
     this.setTotal();
 
-    this.itemSize = parseInt(this.itemSize.toString(), 10);
-    this.current = parseInt(this.current.toString(), 10);
-    this.dataCount = parseInt(this.dataCount.toString(), 10);
-    this.pageSize = parseInt(this.pageSize.toString(), 10);
+    this.pagerSize = parseInt(this.pagerSize.toString(), 10);
+    this.currentIndex = parseInt(this.currentIndex.toString(), 10);
+    this.dataTotal = parseInt(this.dataTotal.toString(), 10);
+    this.dataSize = parseInt(this.dataSize.toString(), 10);
   }
 
   private setTotal() {
-    this.total = Math.ceil(this.dataCount / this.pageSize);
+    this.total = Math.ceil(this.dataTotal / this.dataSize);
   }
-
 
   private setDefaultSetting() {
     const ps = new PaginationSetting();

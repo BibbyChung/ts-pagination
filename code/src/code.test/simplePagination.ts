@@ -17,10 +17,10 @@ export = function () {
   prepareToRun(this, '@ud_G');
 
   let pageInfo: {
-    itemSize: number,
-    current: number,
-    dataCount: number,
-    pageSize: number,
+    pagerSize: number,
+    currentIndex: number,
+    dataTotal: number,
+    dataSize: number,
   };
   let pagination: SimplePagination;
 
@@ -30,7 +30,7 @@ export = function () {
 
   this.When(/^ud_G ==> prepare the normal pagination\.$/, function () {
 
-    pagination = new SimplePagination(pageInfo.itemSize, pageInfo.current, pageInfo.dataCount, pageInfo.pageSize);
+    pagination = new SimplePagination(pageInfo.pagerSize, pageInfo.currentIndex, pageInfo.dataTotal, pageInfo.dataSize);
     pagination.build();
 
   });
@@ -56,12 +56,12 @@ export = function () {
 
     const exp: {
       total: number,
-      current: number,
+      currentIndex: number,
     } = (table.hashes() as any[]).toConvertType()[0];
     const act = pagination;
 
     assert.equal(act.total, exp.total);
-    assert.equal(act.current, exp.current);
+    assert.equal(act.currentIndex, exp.currentIndex);
 
   });
 
