@@ -17,7 +17,7 @@ export = function () {
   prepareToRun(this, '@ud_G');
 
   let pageInfo: {
-    pagerSize: number,
+    pagerItemSize: number,
     currentIndex: number,
     dataTotal: number,
     dataSize: number,
@@ -30,7 +30,7 @@ export = function () {
 
   this.When(/^ud_G ==> prepare the normal pagination\.$/, function () {
 
-    pagination = new SimplePagination(pageInfo.pagerSize, pageInfo.currentIndex, pageInfo.dataTotal, pageInfo.dataSize);
+    pagination = new SimplePagination(pageInfo.pagerItemSize, pageInfo.currentIndex, pageInfo.dataTotal, pageInfo.dataSize);
     pagination.build();
 
   });

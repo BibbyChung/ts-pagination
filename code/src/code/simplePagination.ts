@@ -4,13 +4,13 @@ import { PaginationBase } from './core/paginationBase';
 export class SimplePagination extends PaginationBase {
 
   constructor(
-    pagerSize: number,
+    pagerItemSize: number,
     currentIndex: number,
     dataTotal: number,
     dataSize: number,
   ) {
     super(
-      pagerSize,
+      pagerItemSize,
       currentIndex,
       dataTotal,
       dataSize,
@@ -44,7 +44,7 @@ export class SimplePagination extends PaginationBase {
     }
 
     const pi = this.getDefaultPagerItem();
-    pi.index = (p - 1) * this.pagerSize;
+    pi.index = (p - 1) * this.pagerItemSize;
     pi.text = this.setting.preGroupText;
     pi.type = PagerEnum.PreGroup;
     this.items.push(pi);
@@ -68,12 +68,12 @@ export class SimplePagination extends PaginationBase {
 
   private processItems() {
     const p = this.getCurrentPagerStatus();
-    const count = Math.min(this.pagerSize, this.total - (p * this.pagerSize));
+    const count = Math.min(this.pagerItemSize, this.total - (p * this.pagerItemSize));
 
     for (let i = 1; i <= count; i += 1) {
       const pi = this.getDefaultPagerItem();
-      pi.index = (p * this.pagerSize) + i - 1;
-      pi.text = ((p * this.pagerSize) + i).toString();
+      pi.index = (p * this.pagerItemSize) + i - 1;
+      pi.text = ((p * this.pagerItemSize) + i).toString();
       pi.type = PagerEnum.Number;
       pi.isCurrent = pi.index === this.currentIndex;
       this.items.push(pi);
@@ -103,12 +103,12 @@ export class SimplePagination extends PaginationBase {
 
     const p = this.getCurrentPagerStatus();
 
-    if ((p + 1) * this.pagerSize >= this.total) {
+    if ((p + 1) * this.pagerItemSize >= this.total) {
       return;
     }
 
     const pi = this.getDefaultPagerItem();
-    pi.index = (p + 1) * this.pagerSize;
+    pi.index = (p + 1) * this.pagerItemSize;
     pi.text = this.setting.nextGroupText;
     pi.type = PagerEnum.NextGroup;
     this.items.push(pi);
@@ -131,8 +131,8 @@ export class SimplePagination extends PaginationBase {
   }
 
   private getCurrentPagerStatus() {
-    let p = Math.floor((this.currentIndex + 1) / this.pagerSize);
-    if (((this.currentIndex + 1) % this.pagerSize) === 0) {
+    let p = Math.floor((this.currentIndex + 1) / this.pagerItemSize);
+    if (((this.currentIndex + 1) % this.pagerItemSize) === 0) {
       p -= 1;
     }
     return p;

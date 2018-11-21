@@ -8,7 +8,7 @@ export abstract class PaginationBase {
   total: number;
 
   constructor(
-    public pagerSize: number,
+    public pagerItemSize: number,
     public currentIndex: number,
     public dataTotal: number,
     public dataSize: number,
@@ -16,7 +16,7 @@ export abstract class PaginationBase {
     this.setDefaultSetting();
     this.setTotal();
 
-    this.pagerSize = parseInt(this.pagerSize.toString(), 10);
+    this.pagerItemSize = parseInt(this.pagerItemSize.toString(), 10);
     this.currentIndex = parseInt(this.currentIndex.toString(), 10);
     this.dataTotal = parseInt(this.dataTotal.toString(), 10);
     this.dataSize = parseInt(this.dataSize.toString(), 10);

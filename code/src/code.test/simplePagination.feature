@@ -2,8 +2,8 @@
 Feature: test the normal pagination.
   Scenario: set up data and test it #1.
     Given ud_G ==> prepare the pagination data.
-      | pagerSize:Number | currentIndex:Number | dataTotal:Number | dataSize:Number | 
-      | 3                | 9                   | 64               | 5               | 
+      | pagerItemSize:Number | currentIndex:Number | dataTotal:Number | dataSize:Number | 
+      | 3                    | 9                   | 64               | 5               | 
      When ud_G ==> prepare the normal pagination.
      Then ud_G ==> the page items should equal those data.
       | isCurrent:Boolean | isEnabled:Boolean | index:Number | text  | type | 
@@ -22,8 +22,8 @@ Feature: test the normal pagination.
   
   Scenario: set up data and test it #2.
     Given ud_G ==> prepare the pagination data.
-      | pagerSize:Number | currentIndex:Number | dataTotal:Number | dataSize:Number | 
-      | 3                | 0                   | 64               | 5               | 
+      | pagerItemSize:Number | currentIndex:Number | dataTotal:Number | dataSize:Number | 
+      | 3                    | 0                   | 64               | 5               | 
      When ud_G ==> prepare the normal pagination.
      Then ud_G ==> the page items should equal those data.
       | isCurrent:Boolean | isEnabled:Boolean | index:Number | text | type | 
@@ -40,8 +40,8 @@ Feature: test the normal pagination.
   
   Scenario: set up data and test it #3.
     Given ud_G ==> prepare the pagination data.
-      | pagerSize:Number | currentIndex:Number | dataTotal:Number | dataSize:Number | 
-      | 3                | 1                   | 64               | 5               | 
+      | pagerItemSize:Number | currentIndex:Number | dataTotal:Number | dataSize:Number | 
+      | 3                    | 1                   | 64               | 5               | 
      When ud_G ==> prepare the normal pagination.
      Then ud_G ==> the page items should equal those data.
       | isCurrent:Boolean | isEnabled:Boolean | index:Number | text  | type | 
@@ -59,8 +59,8 @@ Feature: test the normal pagination.
   
   Scenario: set up data and test it #4.
     Given ud_G ==> prepare the pagination data.
-      | pagerSize:Number | currentIndex:Number | dataTotal:Number | dataSize:Number | 
-      | 3                | 2                   | 64               | 5               | 
+      | pagerItemSize:Number | currentIndex:Number | dataTotal:Number | dataSize:Number | 
+      | 3                    | 2                   | 64               | 5               | 
      When ud_G ==> prepare the normal pagination.
      Then ud_G ==> the page items should equal those data.
       | isCurrent:Boolean | isEnabled:Boolean | index:Number | text  | type | 
@@ -78,8 +78,8 @@ Feature: test the normal pagination.
   
   Scenario: set up data and test it #5.
     Given ud_G ==> prepare the pagination data.
-      | pagerSize:Number | currentIndex:Number | dataTotal:Number | dataSize:Number | 
-      | 3                | 3                   | 64               | 5               | 
+      | pagerItemSize:Number | currentIndex:Number | dataTotal:Number | dataSize:Number | 
+      | 3                    | 3                   | 64               | 5               | 
      When ud_G ==> prepare the normal pagination.
      Then ud_G ==> the page items should equal those data.
       | isCurrent:Boolean | isEnabled:Boolean | index:Number | text  | type | 
@@ -98,8 +98,8 @@ Feature: test the normal pagination.
   
   Scenario: set up data and test it #6.
     Given ud_G ==> prepare the pagination data.
-      | pagerSize:Number | currentIndex:Number | dataTotal:Number | dataSize:Number | 
-      | 3                | 12                  | 64               | 5               | 
+      | pagerItemSize:Number | currentIndex:Number | dataTotal:Number | dataSize:Number | 
+      | 3                    | 12                  | 64               | 5               | 
      When ud_G ==> prepare the normal pagination.
      Then ud_G ==> the page items should equal those data.
       | isCurrent:Boolean | isEnabled:Boolean | index:Number | text  | type | 
@@ -114,8 +114,8 @@ Feature: test the normal pagination.
   
   Scenario: set up data and test it #7.
     Given ud_G ==> prepare the pagination data.
-      | pagerSize:Number | currentIndex:Number | dataTotal:Number | dataSize:Number | 
-      | 3                | 11                  | 64               | 5               | 
+      | pagerItemSize:Number | currentIndex:Number | dataTotal:Number | dataSize:Number | 
+      | 3                    | 11                  | 64               | 5               | 
      When ud_G ==> prepare the normal pagination.
      Then ud_G ==> the page items should equal those data.
       | isCurrent:Boolean | isEnabled:Boolean | index:Number | text  | type | 

@@ -21,12 +21,12 @@ You have both choices of TypeScirpt or JavaScript.
 //simple pagination
 import { SimplePagination } from 'ts-pagination';
 
-const pagerSize = 8; // pager items per page
+const pagerItemSize = 8; // pager item size per page
 const currentIndex = 3; // currentIndex pagination item
 const dataTotal = 151; // total data count
 const dataSize = 10; // data items per page
 
-const simpleP = new SimplePagination(pagerSize, currentIndex, dataTotal, dataSize);
+const simpleP = new SimplePagination(pagerItemSize, currentIndex, dataTotal, dataSize);
 simpleP.build();
 
 for (let p of simpleP.items) {
@@ -42,7 +42,7 @@ setting.preGroupText = 'preGroupText';
 setting.PreText = 'PreText';
 setting.nextText = 'nextText';
 
-pagination = new SimplePagination(pageInfo.pagerSize, pageInfo.currentIndex, pageInfo.dataTotal, pageInfo.dataSize);
+pagination = new SimplePagination(pageInfo.pagerItemSize, pageInfo.currentIndex, pageInfo.dataTotal, pageInfo.dataSize);
 pagination.setting = setting;
 pagination.build();
 
@@ -55,7 +55,7 @@ pagination.build();
 
 ```js
 PaginationBase {
-    pagerSize: number;
+    pagerItemSize: number;
     currentIndex: number;
     dataTotal: number;
     dataSize: number;
