@@ -1,7 +1,8 @@
+import { IPagination } from './IPagination';
 import { PagerItem } from './pagerItem';
 import { PaginationSetting } from './paginationSetting';
 
-export abstract class PaginationBase {
+export abstract class PaginationBase implements IPagination {
 
   items: PagerItem[] = [];
   setting: PaginationSetting;

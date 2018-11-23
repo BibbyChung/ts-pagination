@@ -1,7 +1,7 @@
-import { PaginationSetting } from './code/core/paginationSetting';
-import { PagerItem, PagerEnum } from './code/core/pagerItem';
+import { IPagination } from './code/core/IPagination';
+import { PagerEnum, PagerItem } from './code/core/pagerItem';
 import { PaginationBase } from './code/core/paginationBase';
-
+import { PaginationSetting } from './code/core/paginationSetting';
 import { SimplePagination } from './code/simplePagination';
 
 // let simpleP = new SimplePagination(3, 11, 64, 5);
@@ -20,10 +20,4 @@ import { SimplePagination } from './code/simplePagination';
 //     console.log(p);
 // }
 
-export {
-    PagerItem,
-    PagerEnum,
-    PaginationBase,
-    SimplePagination,
-    PaginationSetting,
-};
+export { PagerItem, PagerEnum, IPagination, PaginationBase, SimplePagination, PaginationSetting };
