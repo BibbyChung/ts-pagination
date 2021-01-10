@@ -1,3 +1,2 @@
-code/node_modules
-code/test/*
-code/dist/*
+node_modules
+test/**/*

@@ -18,7 +18,8 @@
   "license": "MIT",
   "keywords": [
     "pagination",
-    "pager"
+    "pager",
+    "typescript"
   ],
   "devDependencies": {
     "@types/node": "^10.12.9",
