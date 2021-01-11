@@ -1,4 +1,4 @@
-import { PagerItem, SimplePagination } from "../src/main";
+import { PagerItem, SimplePagination } from "../src/_index";
 import { convertTableToTypeArray } from "../src/util";
 
 const { Given, When, Then } = require("cucumber");

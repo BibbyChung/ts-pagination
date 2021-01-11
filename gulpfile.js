@@ -38,7 +38,7 @@ const getNewBuffer = (buffer) => {
   const str = buffer.toString();
   const arr = str.split('\n');
 
-  if (arr.length == 0){
+  if (arr.length == 0) {
     return buffer;
   }
 
@@ -84,7 +84,7 @@ const addTagForFeatureFiles = () => {
 
     return stream;
   }
-  
+
   return gulp.src('./features/**/*.feature')
     .pipe(toProcess())
     .pipe(gulp.dest('./features/'));
@@ -114,6 +114,7 @@ const cmd = (str) => async (cb) => {
 //= ================================== Tasks ===================================
 
 exports.test = cmd('cucumber-js --require features/tests.setup.js --require features/**/*.ts --format node_modules/cucumber-pretty');
+exports.testCI = cmd("cucumber-js --require features/tests.setup.js --require features/**/*.ts");
 
 exports.addTagForFeatureFiles = gulp.series(
   addTagForFeatureFiles,
@@ -121,7 +122,6 @@ exports.addTagForFeatureFiles = gulp.series(
 );
 
 exports.build = gulp.parallel(
-  cmd("cucumber-js --require features/tests.setup.js --require 'features/**/*.ts'"),
   cmd('tsc -p ./tsconfig.json'),
   cmd('tsc -p ./tsconfig.esm5.json'),
 );
