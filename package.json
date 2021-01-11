@@ -5,8 +5,9 @@
   "main": "./dist/main.js",
   "types": "./dist/main.d.ts",
   "scripts": {
-    "test": "cucumber-js --require features/tests.setup.js --require 'features/**/*.ts' --format node_modules/cucumber-pretty",
-    "test:ci": "./node_modules/gulp/bin/gulp.js",
+    "test": "gulp test",
+    "test:ci": "",
+    "addTagForFeatureFiles": "gulp addTagForFeatureFiles",
     "upgrade-interactive": "npx npm-check --update"
   },
   "homepage": "https://github.com/BibbyChung/ts-pagination#readme",
