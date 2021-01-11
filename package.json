@@ -14,7 +14,7 @@
     "upgrade-interactive": "npx npm-check --update"
   },
   "homepage": "https://github.com/BibbyChung/ts-pagination#readme",
-  "bugs": "https://github.com/BibbyChung/ngx-config-form/issues",
+  "bugs": "https://github.com/BibbyChung/ts-pagination/issues",
   "repository": {
     "url": "git+https://github.com/BibbyChung/ts-pagination.git",
     "type": "git"
