@@ -1,4 +1,5 @@
-# ts-pagination [![Build Status](https://travis-ci.org/BibbyChung/ts-pagination.svg?branch=master)](https://travis-ci.org/BibbyChung/ts-pagination) [![npm](https://img.shields.io/npm/v/ts-pagination.svg?maxAge=2592000)]()
+# ts-pagination [![Build Status](https://travis-ci.org/BibbyChung/ts-pagination.svg?branch=master)](https://travis-ci.org/BibbyChung/ts-pagination) [![npm](https://img.shields.io/npm/v/ts-pagination.svg)](https://github.com/BibbyChung/ts-pagination) 
+
 
 Pagination for Nodejs and JavaScript..
 
