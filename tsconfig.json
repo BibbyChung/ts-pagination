@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "ES2015",
+    "moduleResolution": "Node",
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "diagnostics": true,
+    "removeComments": true,
+    "outDir": "./dist/cjs",
+    "module": "CommonJS",
+    "declaration": true
+  },
+  "exclude": [
+    "node_modules",
+    "features/**/*.feature.ts"
+  ],
+  "include": [
+    "src/**/*.ts"
+  ]
+}

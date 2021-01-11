@@ -1,0 +1,40 @@
+{
+  "name": "ts-pagination",
+  "version": "2.0.0",
+  "description": "Pagination for Node.js and JavaScript",
+  "main": "dist/cjs/_index.js",
+  "module": "dist/esm5/_index.js",
+  "types": "dist/cjs/_index.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "test": "gulp test",
+    "test:ci": "gulp testCI",
+    "build": "gulp build",
+    "addTagForFeatureFiles": "gulp addTagForFeatureFiles",
+    "upgrade-interactive": "npx npm-check --update"
+  },
+  "homepage": "https://github.com/BibbyChung/ts-pagination#readme",
+  "bugs": "https://github.com/BibbyChung/ngx-config-form/issues",
+  "repository": {
+    "url": "git+https://github.com/BibbyChung/ts-pagination.git",
+    "type": "git"
+  },
+  "author": "Bibby Chung",
+  "license": "MIT",
+  "keywords": [
+    "pagination",
+    "pager",
+    "typescript"
+  ],
+  "devDependencies": {
+    "@types/node": "^14.14.20",
+    "assert": "^2.0.0",
+    "cucumber": "^6.0.5",
+    "cucumber-pretty": "^6.0.0",
+    "gulp": "^4.0.2",
+    "rimraf": "^3.0.2",
+    "through2": "^4.0.2",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.3"
+  }
+}
