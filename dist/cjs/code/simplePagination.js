@@ -7,6 +7,13 @@ class SimplePagination extends paginationBase_1.PaginationBase {
     constructor(pagerItemSize, currentIndex, dataTotal, dataSize) {
         super(pagerItemSize, currentIndex, dataTotal, dataSize);
     }
+    getCurrentPagerStatus() {
+        let p = Math.floor((this.currentIndex + 1) / this.pagerItemSize);
+        if (((this.currentIndex + 1) % this.pagerItemSize) === 0) {
+            p -= 1;
+        }
+        return p;
+    }
     first() {
         if (!this.setting.isShowFirstLastItem) {
             return;
@@ -18,7 +25,7 @@ class SimplePagination extends paginationBase_1.PaginationBase {
         pi.index = 0;
         pi.text = this.setting.firstText;
         pi.type = pagerItem_1.PagerEnum.First;
-        this.items.push(pi);
+        this._items.push(pi);
     }
     preGroup() {
         if (!this.setting.isShowPrevNextGroupItem) {
@@ -32,7 +39,7 @@ class SimplePagination extends paginationBase_1.PaginationBase {
         pi.index = (p - 1) * this.pagerItemSize;
         pi.text = this.setting.preGroupText;
         pi.type = pagerItem_1.PagerEnum.PreGroup;
-        this.items.push(pi);
+        this._items.push(pi);
     }
     preItem() {
         if (!this.setting.isShowPrevNextItem) {
@@ -42,7 +49,7 @@ class SimplePagination extends paginationBase_1.PaginationBase {
         pi.index = this.currentIndex - 1;
         pi.text = this.setting.PreText;
         pi.type = pagerItem_1.PagerEnum.Previous;
-        this.items.push(pi);
+        this._items.push(pi);
         if (this.currentIndex === 0) {
             pi.isEnabled = false;
         }
@@ -56,7 +63,7 @@ class SimplePagination extends paginationBase_1.PaginationBase {
             pi.text = ((p * this.pagerItemSize) + i).toString();
             pi.type = pagerItem_1.PagerEnum.Number;
             pi.isCurrent = pi.index === this.currentIndex;
-            this.items.push(pi);
+            this._items.push(pi);
         }
     }
     nextItem() {
@@ -67,7 +74,7 @@ class SimplePagination extends paginationBase_1.PaginationBase {
         pi.index = this.currentIndex + 1;
         pi.text = this.setting.nextText;
         pi.type = pagerItem_1.PagerEnum.Next;
-        this.items.push(pi);
+        this._items.push(pi);
         if (this.currentIndex + 1 === this.total) {
             pi.isEnabled = false;
         }
@@ -84,7 +91,7 @@ class SimplePagination extends paginationBase_1.PaginationBase {
         pi.index = (p + 1) * this.pagerItemSize;
         pi.text = this.setting.nextGroupText;
         pi.type = pagerItem_1.PagerEnum.NextGroup;
-        this.items.push(pi);
+        this._items.push(pi);
     }
     last() {
         if (!this.setting.isShowFirstLastItem) {
@@ -97,23 +104,7 @@ class SimplePagination extends paginationBase_1.PaginationBase {
         pi.index = this.total - 1;
         pi.text = this.setting.lastText;
         pi.type = pagerItem_1.PagerEnum.Last;
-        this.items.push(pi);
-    }
-    getCurrentPagerStatus() {
-        let p = Math.floor((this.currentIndex + 1) / this.pagerItemSize);
-        if (((this.currentIndex + 1) % this.pagerItemSize) === 0) {
-            p -= 1;
-        }
-        return p;
-    }
-    build() {
-        this.first();
-        this.preGroup();
-        this.preItem();
-        this.processItems();
-        this.nextItem();
-        this.nextGroup();
-        this.last();
+        this._items.push(pi);
     }
 }
 exports.SimplePagination = SimplePagination;

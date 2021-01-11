@@ -6,18 +6,11 @@ export class PaginationBase {
         this.currentIndex = currentIndex;
         this.dataTotal = dataTotal;
         this.dataSize = dataSize;
-        this.items = [];
-        this.setDefaultSetting();
-        this.setTotal();
+        this._items = [];
         this.pagerItemSize = parseInt(this.pagerItemSize.toString(), 10);
         this.currentIndex = parseInt(this.currentIndex.toString(), 10);
         this.dataTotal = parseInt(this.dataTotal.toString(), 10);
         this.dataSize = parseInt(this.dataSize.toString(), 10);
-    }
-    setTotal() {
-        this.total = Math.ceil(this.dataTotal / this.dataSize);
-    }
-    setDefaultSetting() {
         const ps = new PaginationSetting();
         ps.firstText = 'first';
         ps.lastText = 'last';
@@ -30,11 +23,33 @@ export class PaginationBase {
         ps.isShowPrevNextItem = true;
         this.setting = ps;
     }
+    get items() {
+        return this._items;
+    }
+    get setting() {
+        return this._setting;
+    }
+    set setting(v) {
+        this._setting = v;
+        this.setup();
+    }
+    get total() {
+        return Math.ceil(this.dataTotal / this.dataSize);
+    }
     getDefaultPagerItem() {
         const pi = new PagerItem();
         pi.isCurrent = false;
         pi.isEnabled = true;
         return pi;
+    }
+    setup() {
+        this.first();
+        this.preGroup();
+        this.preItem();
+        this.processItems();
+        this.nextItem();
+        this.nextGroup();
+        this.last();
     }
 }
 //# sourceMappingURL=paginationBase.js.map

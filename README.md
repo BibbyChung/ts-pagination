@@ -27,7 +27,6 @@ const dataTotal = 151; // total data count
 const dataSize = 10; // data items per page
 
 const simpleP = new SimplePagination(pagerItemSize, currentIndex, dataTotal, dataSize);
-simpleP.build();
 
 for (let p of simpleP.items) {
     //do something..
@@ -44,7 +43,6 @@ setting.nextText = 'nextText';
 
 pagination = new SimplePagination(pageInfo.pagerItemSize, pageInfo.currentIndex, pageInfo.dataTotal, pageInfo.dataSize);
 pagination.setting = setting;
-pagination.build();
 
 ```
 

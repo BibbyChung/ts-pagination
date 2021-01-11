@@ -24,7 +24,7 @@ class MiddlePagination extends paginationBase_1.PaginationBase {
             pi.text = (i + 1).toString();
             pi.type = pagerItem_1.PagerEnum.Number;
             pi.isCurrent = pi.index === this.currentIndex;
-            this.items.push(pi);
+            this._items.push(pi);
         }
     }
     first() {
@@ -36,7 +36,7 @@ class MiddlePagination extends paginationBase_1.PaginationBase {
             pi.index = 0;
             pi.text = this.setting.firstText;
             pi.type = pagerItem_1.PagerEnum.First;
-            this.items.push(pi);
+            this._items.push(pi);
         }
     }
     nextGroup() {
@@ -49,7 +49,7 @@ class MiddlePagination extends paginationBase_1.PaginationBase {
             pi.index = (p + 1) * this.pagerItemSize;
             pi.text = this.setting.nextGroupText;
             pi.type = pagerItem_1.PagerEnum.NextGroup;
-            this.items.push(pi);
+            this._items.push(pi);
         }
     }
     nextItem() {
@@ -61,7 +61,7 @@ class MiddlePagination extends paginationBase_1.PaginationBase {
             pi.index = this.currentIndex + 1;
             pi.text = this.setting.nextText;
             pi.type = pagerItem_1.PagerEnum.Next;
-            this.items.push(pi);
+            this._items.push(pi);
         }
     }
     preItem() {
@@ -73,7 +73,7 @@ class MiddlePagination extends paginationBase_1.PaginationBase {
             pi.index = this.currentIndex - 1;
             pi.text = this.setting.PreText;
             pi.type = pagerItem_1.PagerEnum.Previous;
-            this.items.push(pi);
+            this._items.push(pi);
         }
     }
     preGroup() {
@@ -86,7 +86,7 @@ class MiddlePagination extends paginationBase_1.PaginationBase {
             pi.index = (p - 1) * this.pagerItemSize;
             pi.text = this.setting.preGroupText;
             pi.type = pagerItem_1.PagerEnum.PreGroup;
-            this.items.push(pi);
+            this._items.push(pi);
         }
     }
     last() {
@@ -98,17 +98,8 @@ class MiddlePagination extends paginationBase_1.PaginationBase {
             pi.index = this.total - 1;
             pi.text = this.setting.lastText;
             pi.type = pagerItem_1.PagerEnum.Last;
-            this.items.push(pi);
+            this._items.push(pi);
         }
-    }
-    build() {
-        this.first();
-        this.preGroup();
-        this.preItem();
-        this.processItems();
-        this.nextItem();
-        this.nextGroup();
-        this.last();
     }
 }
 exports.MiddlePagination = MiddlePagination;

@@ -1,6 +1,6 @@
-import { PagerEnum, PagerItem } from './code/core/pagerItem';
-import { PaginationBase } from './code/core/paginationBase';
-import { PaginationSetting } from './code/core/paginationSetting';
-import { SimplePagination } from './code/simplePagination';
-export { PagerItem, PagerEnum, PaginationBase, SimplePagination, PaginationSetting };
+export * from './code/core/IPagination';
+export * from './code/core/pagerItem';
+export * from './code/core/paginationBase';
+export * from './code/core/paginationSetting';
+export * from './code/simplePagination';
 //# sourceMappingURL=_index.js.map

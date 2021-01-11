@@ -4,9 +4,23 @@ import { PaginationSetting } from './paginationSetting';
 
 export abstract class PaginationBase implements IPagination {
 
-  items: PagerItem[] = [];
-  setting: PaginationSetting;
-  total: number;
+  protected _items: PagerItem[] = [];
+  get items() {
+    return this._items;
+  }
+
+  private _setting: PaginationSetting;
+  get setting() {
+    return this._setting;
+  }
+  set setting(v: PaginationSetting) {
+    this._setting = v;
+    this.setup();
+  }
+
+  get total() {
+    return Math.ceil(this.dataTotal / this.dataSize);
+  }
 
   constructor(
     public pagerItemSize: number,
@@ -14,20 +28,11 @@ export abstract class PaginationBase implements IPagination {
     public dataTotal: number,
     public dataSize: number,
   ) {
-    this.setDefaultSetting();
-    this.setTotal();
-
     this.pagerItemSize = parseInt(this.pagerItemSize.toString(), 10);
     this.currentIndex = parseInt(this.currentIndex.toString(), 10);
     this.dataTotal = parseInt(this.dataTotal.toString(), 10);
     this.dataSize = parseInt(this.dataSize.toString(), 10);
-  }
 
-  private setTotal() {
-    this.total = Math.ceil(this.dataTotal / this.dataSize);
-  }
-
-  private setDefaultSetting() {
     const ps = new PaginationSetting();
     ps.firstText = 'first';
     ps.lastText = 'last';
@@ -41,13 +46,35 @@ export abstract class PaginationBase implements IPagination {
     this.setting = ps;
   }
 
-  getDefaultPagerItem() {
+  protected getDefaultPagerItem() {
     const pi = new PagerItem();
     pi.isCurrent = false;
     pi.isEnabled = true;
     return pi;
   }
 
-  abstract build();
+  protected abstract first();
+
+  protected abstract preGroup();
+
+  protected abstract preItem();
+
+  protected abstract processItems();
+
+  protected abstract nextItem();
+
+  protected abstract nextGroup();
+
+  protected abstract last();
+
+  protected setup() {
+    this.first();
+    this.preGroup();
+    this.preItem();
+    this.processItems();
+    this.nextItem();
+    this.nextGroup();
+    this.last();
+  }
 
 }

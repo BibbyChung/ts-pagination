@@ -6,12 +6,20 @@ export declare abstract class PaginationBase implements IPagination {
     currentIndex: number;
     dataTotal: number;
     dataSize: number;
-    items: PagerItem[];
-    setting: PaginationSetting;
-    total: number;
+    protected _items: PagerItem[];
+    get items(): PagerItem[];
+    private _setting;
+    get setting(): PaginationSetting;
+    set setting(v: PaginationSetting);
+    get total(): number;
     constructor(pagerItemSize: number, currentIndex: number, dataTotal: number, dataSize: number);
-    private setTotal;
-    private setDefaultSetting;
-    getDefaultPagerItem(): PagerItem;
-    abstract build(): any;
+    protected getDefaultPagerItem(): PagerItem;
+    protected abstract first(): any;
+    protected abstract preGroup(): any;
+    protected abstract preItem(): any;
+    protected abstract processItems(): any;
+    protected abstract nextItem(): any;
+    protected abstract nextGroup(): any;
+    protected abstract last(): any;
+    protected setup(): void;
 }

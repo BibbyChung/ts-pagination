@@ -1,13 +1,18 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PaginationSetting = exports.SimplePagination = exports.PaginationBase = exports.PagerEnum = exports.PagerItem = void 0;
-const pagerItem_1 = require("./code/core/pagerItem");
-Object.defineProperty(exports, "PagerEnum", { enumerable: true, get: function () { return pagerItem_1.PagerEnum; } });
-Object.defineProperty(exports, "PagerItem", { enumerable: true, get: function () { return pagerItem_1.PagerItem; } });
-const paginationBase_1 = require("./code/core/paginationBase");
-Object.defineProperty(exports, "PaginationBase", { enumerable: true, get: function () { return paginationBase_1.PaginationBase; } });
-const paginationSetting_1 = require("./code/core/paginationSetting");
-Object.defineProperty(exports, "PaginationSetting", { enumerable: true, get: function () { return paginationSetting_1.PaginationSetting; } });
-const simplePagination_1 = require("./code/simplePagination");
-Object.defineProperty(exports, "SimplePagination", { enumerable: true, get: function () { return simplePagination_1.SimplePagination; } });
+__exportStar(require("./code/core/IPagination"), exports);
+__exportStar(require("./code/core/pagerItem"), exports);
+__exportStar(require("./code/core/paginationBase"), exports);
+__exportStar(require("./code/core/paginationSetting"), exports);
+__exportStar(require("./code/simplePagination"), exports);
 //# sourceMappingURL=_index.js.map

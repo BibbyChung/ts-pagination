@@ -9,7 +9,7 @@ export class MiddlePagination extends PaginationBase {
     super(itemSize, current, dataCount, pageSize);
   }
 
-  private processItems() {
+  protected processItems() {
     let rightNumber = this.total - (this.currentIndex + 1);
     if (rightNumber > this.range) {
       rightNumber = this.range;
@@ -28,13 +28,11 @@ export class MiddlePagination extends PaginationBase {
       pi.text = (i + 1).toString();
       pi.type = PagerEnum.Number;
       pi.isCurrent = pi.index === this.currentIndex;
-      this.items.push(pi);
+      this._items.push(pi);
     }
-
   }
 
-  private first() {
-
+  protected first() {
     if (!this.setting.isShowFirstLastItem) {
       return;
     }
@@ -44,12 +42,11 @@ export class MiddlePagination extends PaginationBase {
       pi.index = 0;
       pi.text = this.setting.firstText;
       pi.type = PagerEnum.First;
-      this.items.push(pi);
+      this._items.push(pi);
     }
-
   }
 
-  private nextGroup() {
+  protected nextGroup() {
     if (!this.setting.isShowPrevNextGroupItem) {
       return;
     }
@@ -61,11 +58,11 @@ export class MiddlePagination extends PaginationBase {
       pi.index = (p + 1) * this.pagerItemSize;
       pi.text = this.setting.nextGroupText;
       pi.type = PagerEnum.NextGroup;
-      this.items.push(pi);
+      this._items.push(pi);
     }
   }
 
-  private nextItem() {
+  protected nextItem() {
     if (!this.setting.isShowPrevNextItem) {
       return;
     }
@@ -75,11 +72,11 @@ export class MiddlePagination extends PaginationBase {
       pi.index = this.currentIndex + 1;
       pi.text = this.setting.nextText;
       pi.type = PagerEnum.Next;
-      this.items.push(pi);
+      this._items.push(pi);
     }
   }
 
-  private preItem() {
+  protected preItem() {
     if (!this.setting.isShowPrevNextItem) {
       return;
     }
@@ -89,11 +86,11 @@ export class MiddlePagination extends PaginationBase {
       pi.index = this.currentIndex - 1;
       pi.text = this.setting.PreText;
       pi.type = PagerEnum.Previous;
-      this.items.push(pi);
+      this._items.push(pi);
     }
   }
 
-  private preGroup() {
+  protected preGroup() {
     if (!this.setting.isShowPrevNextGroupItem) {
       return;
     }
@@ -104,11 +101,11 @@ export class MiddlePagination extends PaginationBase {
       pi.index = (p - 1) * this.pagerItemSize;
       pi.text = this.setting.preGroupText;
       pi.type = PagerEnum.PreGroup;
-      this.items.push(pi);
+      this._items.push(pi);
     }
   }
 
-  private last() {
+  protected last() {
     if (!this.setting.isShowFirstLastItem) {
       return;
     }
@@ -118,18 +115,8 @@ export class MiddlePagination extends PaginationBase {
       pi.index = this.total - 1;
       pi.text = this.setting.lastText;
       pi.type = PagerEnum.Last;
-      this.items.push(pi);
+      this._items.push(pi);
     }
-  }
-
-  build() {
-    this.first();
-    this.preGroup();
-    this.preItem();
-    this.processItems();
-    this.nextItem();
-    this.nextGroup();
-    this.last();
   }
 
 }
