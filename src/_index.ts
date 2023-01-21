@@ -4,11 +4,13 @@
 // import { PaginationSetting } from './code/core/paginationSetting';
 // import { SimplePagination } from './code/simplePagination';
 
-export * from './code/core/IPagination';
-export * from './code/core/pagerItem';
-export * from './code/core/paginationBase';
-export * from './code/core/paginationSetting';
-export * from './code/simplePagination';
+// export * from './code/core/IPagination';
+// export * from './code/core/pagerItem';
+// export * from './code/core/paginationBase';
+// export * from './code/core/paginationSetting';
+// export * from './code/simplePagination';
+export * from './code/getSimplePagination';
+export * from './code/core';
 
 // let simpleP = new SimplePagination(3, 11, 64, 5);
 // for (let p of simpleP.items) {

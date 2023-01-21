@@ -1,32 +1,42 @@
 import { strict as assert } from 'assert';
 import { convertTableToTypeArray } from "../src/util";
-import { PagerItem, SimplePagination } from "../src/_index";
+import { IPagination, getSimplePagination, IPageInput, getDefaultPaginationSetting, Pager } from "../src/_index";
 
 const { Given, When, Then } = require("cucumber");
 
 type pageInfoType = {
-  pagerItemSize: number,
-  currentIndex: number,
-  dataTotal: number,
-  dataSize: number,
+  pagerSize: number,
+  currentPage: number,
+  total: number,
+  size: number,
 };
 
-let pageInfo: pageInfoType;
-let pagination: SimplePagination;
+let pageInfo: IPageInput;
+let pagerSize: number;
+let pagination: IPagination;
 
 Given('ud_G ==> prepare the pagination data.', function (dataTable) {
-  pageInfo = convertTableToTypeArray<pageInfoType>(dataTable.hashes())[0];
+  const inputObj = convertTableToTypeArray<pageInfoType>(dataTable.hashes())[0];
+	pageInfo = {
+    currentPage: inputObj.currentPage,
+    size: inputObj.size,
+    total: inputObj.total,
+  };
+	pagerSize = inputObj.pagerSize;
 });
 
 When('ud_G ==> prepare the normal pagination.', function () {
-  pagination = new SimplePagination(pageInfo.pagerItemSize, pageInfo.currentIndex, pageInfo.dataTotal, pageInfo.dataSize);
+	const ps = getDefaultPaginationSetting();
+  pagination = getSimplePagination(pageInfo, pagerSize, ps);
 });
 
 Then('ud_G ==> the page items should equal those data.', function (dataTable) {
-  const expArr = convertTableToTypeArray<PagerItem>(dataTable.hashes());
-  const actArr = pagination.items;
+  const expArr = convertTableToTypeArray<Pager>(dataTable.hashes());
+  const actArr = pagination.data;
 
   assert.notEqual(actArr.length, 0);
+
+	console.log(actArr);
 
   for (let i = 0; i < actArr.length; i += 1) {
     const exp = expArr[i];
@@ -43,10 +53,10 @@ Then('ud_G ==> the page items should equal those data.', function (dataTable) {
 Then('ud_G ==> the pagination should equal those data.', function (dataTable) {
   const exp = convertTableToTypeArray<{
     total: number,
-    currentIndex: number,
+    currentPage: number,
   }>(dataTable.hashes())[0];
   const act = pagination;
 
   assert.equal(act.total, exp.total);
-  assert.equal(act.currentIndex, exp.currentIndex);
+  assert.equal(act.currentPage, exp.currentPage);
 });
