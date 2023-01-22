@@ -77,7 +77,7 @@ export const getSimplePagination = (
   const getNextItem = () => {
     const pi = new Pager();
     const index = info.currentPage + 1;
-    pi.index = index < 0 ? -1 : index;
+    pi.index = index < 0 || index >= pagerTotal ? -1 : index;
     pi.text = setting.nextText;
     pi.type = "Next";
     pi.isEnabled =
@@ -90,7 +90,7 @@ export const getSimplePagination = (
   const getNextGroup = () => {
     const pi = new Pager();
     const index = (pagerGroupIndex + 1) * pagerSize;
-    pi.index = index < 0 ? -1 : index;
+    pi.index = index < 0|| index >= pagerTotal ? -1 : index;
     pi.text = setting.nextGroupText;
     pi.type = "NextGroup";
     pi.isEnabled =
@@ -104,7 +104,7 @@ export const getSimplePagination = (
   const getLast = () => {
     const pi = new Pager();
     const index = pagerTotal - 1;
-    pi.index = index < 0 ? -1 : index;
+    pi.index = index < 0 || index <= info.currentPage ? -1 : index;
     pi.text = setting.lastText;
     pi.type = "Last";
     pi.isEnabled =

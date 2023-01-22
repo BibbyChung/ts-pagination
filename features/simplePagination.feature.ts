@@ -36,17 +36,15 @@ Then('ud_G ==> the page items should equal those data.', function (dataTable) {
 
   assert.notEqual(actArr.length, 0);
 
-	console.log(actArr);
-
   for (let i = 0; i < actArr.length; i += 1) {
     const exp = expArr[i];
     const act = actArr[i];
 
-    assert.equal(act.type, exp.type);
-    assert.equal(act.index, exp.index);
-    assert.equal(act.isCurrent, exp.isCurrent);
-    assert.equal(act.isEnabled, exp.isEnabled);
-    assert.equal(act.text, exp.text);
+    assert.equal(act.type, exp.type, `=> ${i} rows`);
+    assert.equal(act.index, exp.index, `=> ${i} rows`);
+    assert.equal(act.isCurrent, exp.isCurrent, `=> ${i} rows`);
+    assert.equal(act.isEnabled, exp.isEnabled, `=> ${i} rows`);
+    assert.equal(act.text, exp.text, `=> ${i} rows`);
   }
 });
 
