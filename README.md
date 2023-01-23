@@ -56,8 +56,8 @@ console.log(sPagination);
 
 ## Todo
 
-- UI demo
-- middle pagination
+- [x] UI demo
+- [ ] middle pagination
 
 ## Workspace
 
