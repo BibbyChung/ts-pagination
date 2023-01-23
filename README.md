@@ -48,6 +48,12 @@ const sPagination = getSimplePagination(
 console.log(sPagination);
 ```
 
+## Demo
+
+<img width="464" alt="image" src="https://user-images.githubusercontent.com/8520661/214093678-85eb61ed-fa2a-4051-89e7-6c0523b1d8a9.png">
+
+[playground](https://stackblitz.com/edit/vitejs-vite-dxv9cy?file=src%2FApp.tsx,src%2Fcomponents%2Fshort-pagination.tsx,src%2Fcomponents%2Fgroup-pagination.tsx)
+
 ## Todo
 
 - UI demo
