@@ -1,5 +1,2 @@
-export * from './code/core/IPagination';
-export * from './code/core/pagerItem';
-export * from './code/core/paginationBase';
-export * from './code/core/paginationSetting';
-export * from './code/simplePagination';
+export * from './code/getSimplePagination';
+export * from './code/core';
