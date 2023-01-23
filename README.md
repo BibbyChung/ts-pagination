@@ -1,4 +1,4 @@
-# ts-pagination [![Build Status](https://img.shields.io/github/checks-status/bibbychung/ts-pagination/master)](https://travis-ci.org/BibbyChung/ts-pagination) [![npm](https://img.shields.io/npm/v/ts-pagination.svg)](https://github.com/BibbyChung/ts-pagination)
+# ts-pagination [![Build Status](https://img.shields.io/github/actions/workflow/status/bibbychung/ts-pagination/ci.yml?branch=master)](https://img.shields.io/github/actions/workflow/status/bibbychung/ts-pagination/ci.yml?branch=master) [![npm](https://img.shields.io/npm/v/ts-pagination.svg)](https://github.com/BibbyChung/ts-pagination)
 
 Pagination for Nodejs and JavaScript..
 
