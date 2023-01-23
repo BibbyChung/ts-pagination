@@ -96,3 +96,19 @@ PagerEnum {
 
 ## Todo
 - middle pagination
+
+
+## Workspace
+
+```
+docker run --rm -it \
+  -w /app \
+  -v $(pwd):/app \
+  -p 3000:3000 \
+  -p 10000:10000 \
+  -p 24678:24678 \
+  node:16.19-alpine /bin/sh
+
+apk add --no-cache bash &&\
+	npm i -g pnpm
+```

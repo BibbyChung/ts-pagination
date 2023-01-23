@@ -1,36 +1,40 @@
-import { strict as assert } from 'assert';
+import { strict as assert } from "assert";
 import { convertTableToTypeArray } from "../src/util";
-import { IPagination, getSimplePagination, IPageInput, getDefaultPaginationSetting, Pager } from "../src/_index";
+import {
+  getSimplePagination,
+  IPageInput,
+  IPagination,
+  Pager,
+} from "../src/_index";
 
 const { Given, When, Then } = require("cucumber");
 
 type pageInfoType = {
-  pagerSize: number,
-  currentPage: number,
-  total: number,
-  size: number,
+  pagerSize: number;
+  currentPage: number;
+  total: number;
+  size: number;
 };
 
 let pageInfo: IPageInput;
 let pagerSize: number;
 let pagination: IPagination;
 
-Given('ud_G ==> prepare the pagination data.', function (dataTable) {
+Given("ud_G ==> prepare the pagination data.", function (dataTable) {
   const inputObj = convertTableToTypeArray<pageInfoType>(dataTable.hashes())[0];
-	pageInfo = {
+  pageInfo = {
     currentPage: inputObj.currentPage,
     size: inputObj.size,
     total: inputObj.total,
   };
-	pagerSize = inputObj.pagerSize;
+  pagerSize = inputObj.pagerSize;
 });
 
-When('ud_G ==> prepare the normal pagination.', function () {
-	const ps = getDefaultPaginationSetting();
-  pagination = getSimplePagination(pageInfo, pagerSize, ps);
+When("ud_G ==> prepare the normal pagination.", function () {
+  pagination = getSimplePagination(pageInfo, pagerSize);
 });
 
-Then('ud_G ==> the page items should equal those data.', function (dataTable) {
+Then("ud_G ==> the page items should equal those data.", function (dataTable) {
   const expArr = convertTableToTypeArray<Pager>(dataTable.hashes());
   const actArr = pagination.data;
 
@@ -48,10 +52,10 @@ Then('ud_G ==> the page items should equal those data.', function (dataTable) {
   }
 });
 
-Then('ud_G ==> the pagination should equal those data.', function (dataTable) {
+Then("ud_G ==> the pagination should equal those data.", function (dataTable) {
   const exp = convertTableToTypeArray<{
-    total: number,
-    currentPage: number,
+    total: number;
+    currentPage: number;
   }>(dataTable.hashes())[0];
   const act = pagination;
 

@@ -3,8 +3,8 @@ lockfileVersion: 5.4
 specifiers:
   '@types/node': ^18.11.18
   assert: ^2.0.0
-  cucumber: ^6.0.5
-  cucumber-pretty: ^6.0.0
+  cucumber: ^6.0.7
+  cucumber-pretty: ^6.0.1
   gulp: ^4.0.2
   rimraf: ^4.1.1
   through2: ^4.0.2
