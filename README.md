@@ -2,17 +2,15 @@
 
 Pagination for Nodejs and JavaScript..
 
-## Install
+## 🔥🔥🔥 Break Change 🔥🔥🔥
 
-Install this component
+I rewrite it to 3.0 making performance better. So if you use 3.0 above, please check "How to use" section again.
+
+## Install
 
 ```shell
 $ npm install ts-pagination --save
 ```
-
-## Quick Start
-
-You have both choices of TypeScirpt or JavaScript.
 
 ### How to use
 
