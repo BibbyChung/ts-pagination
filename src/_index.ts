@@ -1,5 +1,7 @@
-export * from './code/getSimplePagination';
-export * from './code/core';
+export * from "./code/getSimplePagination";
+export * from "./code/core";
+
+// import { getSimplePagination } from './code/getSimplePagination';
 
 // const data = [
 //   { id: "fb5ea67d-bc35-4be6-8993-88c2adb8b503", name: "bb0", age: 25 },
@@ -10,20 +12,26 @@ export * from './code/core';
 //   { id: "849eaeca-ba38-44fc-98f3-d7d0f9081278", name: "bb5", age: 210 },
 // ];
 
-// const pp1 = getSimplePagination(
+// const sPagination = getSimplePagination(
 //   {
-//     currentPage: 3,
-//     size: 1,
+//     currentPage: 1,
+//     size: 5,
 //     total: data.length,
 //   },
-//   2,
-//   {
-// 		firstText: '...'
-// 	}
+//   3,
+// 	{
+//     firstText: "first",
+//     lastText: "last",
+//     preGroupText: "<<",
+//     nextGroupText: ">>",
+//     PreText: "<",
+//     nextText: ">",
+//     isShowFirstLastItem: true,
+//     isShowPrevNextGroupItem: true,
+//     isShowPrevNextItem: true,
+//   }
 // );
-// console.log(pp1);
-
-
+// console.log(sPagination);
 
 // let simpleP = new SimplePagination(3, 11, 64, 5);
 // for (let p of simpleP.items) {

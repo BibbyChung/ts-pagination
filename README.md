@@ -1,5 +1,4 @@
-# ts-pagination [![Build Status](https://travis-ci.org/BibbyChung/ts-pagination.svg?branch=master)](https://travis-ci.org/BibbyChung/ts-pagination) [![npm](https://img.shields.io/npm/v/ts-pagination.svg)](https://github.com/BibbyChung/ts-pagination) 
-
+# ts-pagination [![Build Status](https://travis-ci.org/BibbyChung/ts-pagination.svg?branch=master)](https://travis-ci.org/BibbyChung/ts-pagination) [![npm](https://img.shields.io/npm/v/ts-pagination.svg)](https://github.com/BibbyChung/ts-pagination)
 
 Pagination for Nodejs and JavaScript..
 
@@ -15,88 +14,45 @@ $ npm install ts-pagination --save
 
 You have both choices of TypeScirpt or JavaScript.
 
-### TypeScript
+### How to use
 
 ```js
+import { getSimplePagination } from "./code/getSimplePagination";
 
-//simple pagination
-import { SimplePagination } from 'ts-pagination';
+const data = [
+  { id: "fb5ea67d-bc35-4be6-8993-88c2adb8b503", name: "bb0", age: 25 },
+  { id: "2fbdb2fb-1d97-4500-b765-ff93744e0d98", name: "bb1", age: 26 },
+  { id: "ba3024f3-2497-47e2-ae11-90556bc084dd", name: "bb2", age: 27 },
+  { id: "bdf07a1d-2d95-4475-9f71-299357c5250f", name: "bb3", age: 28 },
+  { id: "cff6e164-7f8d-4956-9686-fdcd219d03e5", name: "bb4", age: 29 },
+  { id: "849eaeca-ba38-44fc-98f3-d7d0f9081278", name: "bb5", age: 210 },
+];
 
-const pagerItemSize = 8; // pager item size per page
-const currentIndex = 3; // currentIndex pagination item
-const dataTotal = 151; // total data count
-const dataSize = 10; // data items per page
-
-const simpleP = new SimplePagination(pagerItemSize, currentIndex, dataTotal, dataSize);
-
-for (let p of simpleP.items) {
-    //do something..
-}
-
-//customize your wording
-const setting = new PaginationSetting();
-setting.firstText = 'firstText';
-setting.lastText = 'lastText';
-setting.nextGroupText = 'nextGroupText';
-setting.preGroupText = 'preGroupText';
-setting.PreText = 'PreText';
-setting.nextText = 'nextText';
-
-pagination = new SimplePagination(pageInfo.pagerItemSize, pageInfo.currentIndex, pageInfo.dataTotal, pageInfo.dataSize);
-pagination.setting = setting;
-
-```
-
-### JavaScript 
-(later..)
-
-## API
-
-```js
-PaginationBase {
-    pagerItemSize: number;
-    currentIndex: number;
-    dataTotal: number;
-    dataSize: number;
-    items: PagerItem[];
-    setting: PaginationSetting;
-    total: number;
-}
-
-PaginationSetting {
-    firstText: string;
-    lastText: string;
-    preGroupText: string;
-    nextGroupText: string;
-    PreText: string;
-    nextText: string;
-    isShowFirstLastItem: boolean;
-    isShowPrevNextGroupItem: boolean;
-    isShowPrevNextItem: boolean;
-}
-
-PagerItem {
-    index: number;
-    text: string;
-    type: PagerEnum;
-    isCurrent: boolean;
-    isEnabled: boolean;
-}
-
-PagerEnum {
-    Number = 0,
-    First = 1,
-    Last = 2,
-    PreGroup = 3,
-    NextGroup = 4,
-    Previous = 5,
-    Next = 6,
-}
+const sPagination = getSimplePagination(
+  {
+    currentPage: 1,
+    size: 5,
+    total: data.length,
+  },
+  3,
+  {
+    firstText: "first",
+    lastText: "last",
+    preGroupText: "<<",
+    nextGroupText: ">>",
+    PreText: "<",
+    nextText: ">",
+    isShowFirstLastItem: true,
+    isShowPrevNextGroupItem: true,
+    isShowPrevNextItem: true,
+  }
+);
+console.log(sPagination);
 ```
 
 ## Todo
-- middle pagination
 
+- middle pagination
 
 ## Workspace
 
