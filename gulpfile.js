@@ -1,9 +1,8 @@
-const through = require('through2');
-const gulp = require('gulp');
-const spawn = require('child_process').spawn;
+const through = require("through2");
+const gulp = require("gulp");
+const spawn = require("child_process").spawn;
 
 //= ================================== Global Variable ===================================
-
 
 //= ================================== Method ===================================
 
@@ -12,31 +11,33 @@ const replaceSpecialWording = (str, replaceWording, id) => {
     return str;
   }
 
-  if (str.indexOf(' ==> ') != -1) {
+  if (str.indexOf(" ==> ") != -1) {
     return str;
   }
 
   return str.replace(`${replaceWording} `, `${replaceWording} ${id} ==> `);
-}
+};
 
 const getSpecialLetters = (len) => {
-  const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_';
-  let out = '';
+  const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_";
+  let out = "";
 
   for (let i = 0, clen = chars.length; i < len; i++) {
-    out += chars.substr(0 | Math.random() * clen, 1);
+    out += chars.substr(0 | (Math.random() * clen), 1);
   }
 
   return out;
-}
+};
 
 const generateUIDNotMoreThan1million = function () {
-  return ('0000' + (Math.random() * Math.pow(36, 4) << 0).toString(36)).slice(-4)
-}
+  return ("0000" + ((Math.random() * Math.pow(36, 4)) << 0).toString(36)).slice(
+    -4
+  );
+};
 
 const getNewBuffer = (buffer) => {
   const str = buffer.toString();
-  const arr = str.split('\n');
+  const arr = str.split("\n");
 
   if (arr.length == 0) {
     return buffer;
@@ -46,26 +47,26 @@ const getNewBuffer = (buffer) => {
   //const id = generateUIDNotMoreThan1million();
   const newArr = [];
 
-  if (arr[0].indexOf('@') != 0) {
+  if (arr[0].indexOf("@") != 0) {
     newArr.push(`@${id}`);
   } else {
-    id = arr[0].replace('@', '')
+    id = arr[0].replace("@", "");
   }
 
   for (let item of arr) {
     let s = item;
-    s = replaceSpecialWording(s, 'Given', id);
-    s = replaceSpecialWording(s, 'When', id);
-    s = replaceSpecialWording(s, 'Then', id);
-    s = replaceSpecialWording(s, 'And', id);
-    s = replaceSpecialWording(s, 'But', id);
+    s = replaceSpecialWording(s, "Given", id);
+    s = replaceSpecialWording(s, "When", id);
+    s = replaceSpecialWording(s, "Then", id);
+    s = replaceSpecialWording(s, "And", id);
+    s = replaceSpecialWording(s, "But", id);
 
     newArr.push(s);
   }
 
-  const newStr = newArr.join('\n');
+  const newStr = newArr.join("\n");
   return Buffer.from(newStr);
-}
+};
 
 const addTagForFeatureFiles = () => {
   const toProcess = () => {
@@ -83,26 +84,26 @@ const addTagForFeatureFiles = () => {
     });
 
     return stream;
-  }
+  };
 
-  return gulp.src('./features/**/*.feature')
+  return gulp
+    .src("./features/**/*.feature")
     .pipe(toProcess())
-    .pipe(gulp.dest('./features/'));
+    .pipe(gulp.dest("./features/"));
 };
 
-
 const cmd = (str) => async (cb) => {
-  const arr = str.split(' ');
+  const arr = str.split(" ");
   const c0 = arr.shift();
 
-  console.log('exec => ', str);
+  console.log("exec => ", str);
   await new Promise((resolve, reject) => {
-    const ssp = spawn(c0, arr, { stdio: 'inherit' });
-    ssp.on('close', (code) => {
+    const ssp = spawn(c0, arr, { stdio: "inherit" });
+    ssp.on("close", (code) => {
       resolve(code);
     });
 
-    ssp.on('error', function (err) {
+    ssp.on("error", function (err) {
       reject(err);
     });
   });
@@ -110,18 +111,23 @@ const cmd = (str) => async (cb) => {
   cb();
 };
 
-
 //= ================================== Tasks ===================================
 
-exports.test = cmd('cucumber-js --require features/tests.setup.js --require features/**/*.ts --format node_modules/cucumber-pretty');
-exports.testCI = cmd("cucumber-js --require features/tests.setup.js --require features/**/*.ts");
+exports.test = cmd(
+  "cucumber-js --require features/tests.setup.js --require features/**/*.ts --format node_modules/cucumber-pretty"
+);
+exports.testCI = cmd(
+  "cucumber-js --require features/tests.setup.js --require features/**/*.ts"
+);
 
 exports.addTagForFeatureFiles = gulp.series(
   addTagForFeatureFiles,
-  cmd("cucumber-js --require features/tests.setup.js --require features/**/*.ts --format node_modules/cucumber-pretty"),
+  cmd(
+    "cucumber-js --require features/tests.setup.js --require features/**/*.ts --format node_modules/cucumber-pretty"
+  )
 );
 
 exports.build = gulp.parallel(
-  cmd('tsc -p ./tsconfig.json'),
-  cmd('tsc -p ./tsconfig.esm5.json'),
+  cmd("tsc -p ./tsconfig.json"),
+  cmd("tsc -p ./tsconfig.esm5.json")
 );
