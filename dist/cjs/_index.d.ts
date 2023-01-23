@@ -1,2 +1,2 @@
-export * from './code/getSimplePagination';
-export * from './code/core';
+export * from "./code/getSimplePagination";
+export * from "./code/core";
