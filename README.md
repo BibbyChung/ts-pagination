@@ -15,7 +15,7 @@ $ npm install ts-pagination --save
 ### How to use
 
 ```js
-import { getSimplePagination } from "./code/getSimplePagination";
+import { getSimplePagination } from "ts-pagination";
 
 const data = [
   { id: "1", name: "bb0", age: 25 },
