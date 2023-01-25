@@ -1,6 +1,6 @@
 {
   "name": "ts-pagination",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Pagination for Node.js Typescript and JavaScript",
   "main": "dist/cjs/_index.js",
   "module": "dist/esm5/_index.js",
