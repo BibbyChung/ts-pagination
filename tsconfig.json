@@ -13,11 +13,6 @@
     "module": "CommonJS",
     "declaration": true
   },
-  "exclude": [
-    "node_modules",
-    "features/**/*.feature.ts"
-  ],
-  "include": [
-    "src/**/*.ts"
-  ]
+  "exclude": ["node_modules", "features/**/*.feature.ts"],
+  "include": ["src/**/*.ts"]
 }

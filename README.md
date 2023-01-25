@@ -54,10 +54,26 @@ console.log(sPagination);
 
 [playground](https://stackblitz.com/edit/vitejs-vite-dxv9cy)
 
-## Todo
+## Todos
 
 - [x] UI demo
+- [x] testing
 - [ ] middle pagination
+
+## Code Coverage
+
+```bash
+-------------------------|---------|----------|---------|---------|-------------------
+File                     | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
+-------------------------|---------|----------|---------|---------|-------------------
+All files                |     100 |      100 |     100 |     100 |
+ src                     |     100 |      100 |     100 |     100 |
+  _index.ts              |     100 |      100 |     100 |     100 |
+ src/code                |     100 |      100 |     100 |     100 |
+  core.ts                |     100 |      100 |     100 |     100 |
+  getSimplePagination.ts |     100 |      100 |     100 |     100 |
+-------------------------|---------|----------|---------|---------|-------------------
+```
 
 ## Workspace
 

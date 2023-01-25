@@ -20,7 +20,7 @@ let pageInfo: IPageInput;
 let pagerSize: number;
 let pagination: IPagination;
 
-Given("ud_G ==> prepare the pagination data.", function (dataTable) {
+Given("ygtN ==> prepare the pagination data.", function (dataTable) {
   const inputObj = convertTableToTypeArray<pageInfoType>(dataTable.hashes())[0];
   pageInfo = {
     currentPage: inputObj.currentPage,
@@ -30,17 +30,21 @@ Given("ud_G ==> prepare the pagination data.", function (dataTable) {
   pagerSize = inputObj.pagerSize;
 });
 
-When("ud_G ==> prepare the normal pagination.", function () {
-	try {
-    pagination = getSimplePagination(pageInfo, pagerSize);
-  } catch (err) {
-    const act = err.message;
-    const exp = "The currentPage (-2) is invalid.";
-    assert.equal(act, exp);
-  }
+When("ygtN ==> prepare the normal pagination.", function (dataTable) {
+  const obj = convertTableToTypeArray<{
+    First: string;
+    PreGroup: string;
+    Previous: string;
+  }>(dataTable.hashes())[0];
+
+  pagination = getSimplePagination(pageInfo, pagerSize, {
+    firstText: obj.First,
+    preGroupText: obj.PreGroup,
+    PreText: obj.Previous,
+  });
 });
 
-Then("ud_G ==> the page items should equal those data.", function (dataTable) {
+Then("ygtN ==> the page items should equal those data.", function (dataTable) {
   const expArr = convertTableToTypeArray<Pager>(dataTable.hashes());
   const actArr = pagination.data;
 
@@ -58,7 +62,7 @@ Then("ud_G ==> the page items should equal those data.", function (dataTable) {
   }
 });
 
-Then("ud_G ==> the pagination should equal those data.", function (dataTable) {
+Then("ygtN ==> the pagination should equal those data.", function (dataTable) {
   const exp = convertTableToTypeArray<{
     total: number;
     currentPage: number;
