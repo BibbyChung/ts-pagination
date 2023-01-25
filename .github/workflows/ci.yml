@@ -46,6 +46,12 @@ jobs:
         run: |
           cd /app
           pnpm i -r
+      
+      - name: create-coveralls-config
+        run : |
+          cd /app
+          echo "repo_token: ${{ secrets.COVERALLS_REPO_TOKEN }}" > .coveralls.yml
+          ls /app/.coveralls.yml
 
       - name: start-test
         run: |
