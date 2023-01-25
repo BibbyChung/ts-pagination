@@ -1,5 +1,5 @@
 @ud_G
-Feature: test the normal pagination.
+Feature: test the simple pagination.
 	Scenario: set up data and test it #1.
 		Given ud_G ==> prepare the pagination data.
 			| pagerSize:Number | currentPage:Number | total:Number | size:Number |
@@ -137,3 +137,26 @@ Feature: test the normal pagination.
 		And ud_G ==> the pagination should equal those data.
 			| total:Number | currentPage:Number |
 			| 64           | 11                 |
+
+	Scenario: set up data and test it #8.
+		Given ud_G ==> prepare the pagination data.
+			| pagerSize:Number | currentPage:Number | total:Number | size:Number |
+			| 3                | 999                | 64           | 5           |
+		When ud_G ==> prepare the normal pagination.
+		Then ud_G ==> the page items should equal those data.
+			| isCurrent:Boolean | isEnabled:Boolean | index:Number | text  | type      |
+			| false             | true              | 0            | first | First     |
+			| false             | true              | 996          | <<    | PreGroup  |
+			| false             | true              | 998          | <     | Previous  |
+			| false             | false             | -1           | >     | Next      |
+			| false             | false             | -1           | >>    | NextGroup |
+			| false             | false             | -1           | last  | Last      |
+		And ud_G ==> the pagination should equal those data.
+			| total:Number | currentPage:Number |
+			| 64           | 999                |
+
+	Scenario: set up data and test it #9.
+		Given ud_G ==> prepare the pagination data.
+			| pagerSize:Number | currentPage:Number | total:Number | size:Number |
+			| 3                | -2                 | 64           | 5           |
+		When ud_G ==> prepare the normal pagination.

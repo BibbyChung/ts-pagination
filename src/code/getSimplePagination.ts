@@ -13,6 +13,10 @@ export const getSimplePagination = (
   pagerSize: number,
   setting?: Partial<IDefaultPaginationSetting>
 ) => {
+	if (+info.currentPage < 0) {
+    throw new Error(`The currentPage (${info.currentPage}) is invalid.`);
+  }
+
   const pagerGroupIndex = getPagerGroupIndex(info.currentPage, pagerSize);
   const pagerTotal = getPagerTotal(info.total, info.size);
   const pagerCount = Math.min(
@@ -65,8 +69,8 @@ export const getSimplePagination = (
   for (let i = 1; i <= pagerCount; i += 1) {
     const pi = new Pager();
     const index = pagerGroupIndex * pagerSize + i - 1;
-    pi.index = pi.index = index < 0 ? -1 : index;
-    pi.text = (pagerGroupIndex * pagerSize + i).toString();
+    pi.index = index;
+    pi.text = (index + 1).toString();
     pi.type = "Number";
     pi.isCurrent = pi.index === info.currentPage;
     pi.isEnabled = true;

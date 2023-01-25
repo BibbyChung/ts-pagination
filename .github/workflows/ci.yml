@@ -42,9 +42,13 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
 
-      - name: start-test
+      - name: install-packages
         run: |
           cd /app
           pnpm i -r
-          pnpm run test:ci
+
+      - name: start-test
+        run: |
+          cd /app
+          pnpm run coverage
 

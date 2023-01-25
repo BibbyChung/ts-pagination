@@ -3,6 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getSimplePagination = void 0;
 const core_1 = require("./core");
 const getSimplePagination = (info, pagerSize, setting) => {
+    if (+info.currentPage < 0) {
+        throw new Error(`The currentPage (${info.currentPage}) is invalid.`);
+    }
     const pagerGroupIndex = (0, core_1.getPagerGroupIndex)(info.currentPage, pagerSize);
     const pagerTotal = (0, core_1.getPagerTotal)(info.total, info.size);
     const pagerCount = Math.min(pagerSize, pagerTotal - pagerGroupIndex * pagerSize);
@@ -43,8 +46,8 @@ const getSimplePagination = (info, pagerSize, setting) => {
     for (let i = 1; i <= pagerCount; i += 1) {
         const pi = new core_1.Pager();
         const index = pagerGroupIndex * pagerSize + i - 1;
-        pi.index = pi.index = index < 0 ? -1 : index;
-        pi.text = (pagerGroupIndex * pagerSize + i).toString();
+        pi.index = index;
+        pi.text = (index + 1).toString();
         pi.type = "Number";
         pi.isCurrent = pi.index === info.currentPage;
         pi.isEnabled = true;
