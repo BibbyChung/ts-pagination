@@ -2,16 +2,21 @@ name: CI
 
 on:
   # push:
-  #   branches: [ "master" ]
+  #   branches:
+  #     - master
   pull_request:
-    branches: [ "master" ]
+    branches:
+      - master
+    types:
+      - opened
+      - closed
   workflow_dispatch:
     inputs:
       my-tag:
-        description: 'tag'
+        description: "tag"
         required: true
-        default: 'trigger001'
-      
+        default: "trigger test"
+
 jobs:
   run-test:
     runs-on: ubuntu-latest
@@ -28,8 +33,8 @@ jobs:
           curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
           chmod +x ./kubectl
           mv ./kubectl /usr/local/bin/kubectl
-      
-      - name: check out 
+
+      - name: check out
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
@@ -46,9 +51,9 @@ jobs:
         run: |
           cd /app
           pnpm i -r
-      
+
       - name: create-coveralls-config
-        run : |
+        run: |
           cd /app
           echo "repo_token: ${{ secrets.COVERALLS_REPO_TOKEN }}" > .coveralls.yml
           ls /app/.coveralls.yml
@@ -57,4 +62,3 @@ jobs:
         run: |
           cd /app
           pnpm run coverage
-
