@@ -28,7 +28,7 @@ jobs:
       volumes:
         - ${{ github.workspace }}:/app
     steps:
-      - run: echo "? The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - run: echo "*** The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }} ***"
       - name: install tools
         run: |
           apk add --no-cache bash git
