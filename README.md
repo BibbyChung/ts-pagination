@@ -2,7 +2,7 @@
 
 Pagination for Nodejs and JavaScript..
 
-## 🔥🔥🔥 Break Change 🔥🔥🔥
+## 🔥🔥🔥 Breaking Change 🔥🔥🔥
 
 I rewrite it to 3.0 making performance better and size smaller. So if you use 3.0 above, please check "How to use" section again.
 
